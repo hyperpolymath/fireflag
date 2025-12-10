@@ -1,0 +1,36 @@
+= fireflag - Citation Guide
+:toc:
+
+== BibTeX
+
+[source,bibtex]
+----
+@software{fireflag_2025,
+  author = {Polymath, Hyper},
+  title = {fireflag},
+  year = {2025},
+  url = {https://github.com/hyperpolymath/fireflag},
+  license = {AGPL-3.0-or-later}
+}
+----
+
+== Harvard Style
+
+Polymath, H. (2025) _fireflag_ [Computer software]. Available at: https://github.com/hyperpolymath/fireflag
+
+== OSCOLA
+
+Hyper Polymath, 'fireflag' (2025) <https://github.com/hyperpolymath/fireflag>
+
+== MLA
+
+Polymath, Hyper. "fireflag." 2025, github.com/hyperpolymath/fireflag.
+
+== APA 7
+
+Polymath, H. (2025). _fireflag_ [Computer software]. GitHub. https://github.com/hyperpolymath/fireflag
+
+== See Also
+
+* link:../CITATION.cff[CITATION.cff]
+* link:../codemeta.json[codemeta.json]

@@ -1,0 +1,179 @@
+= fireflag Roadmap
+:toc: macro
+:toclevels: 2
+:icons: font
+
+Development roadmap for fireflag - feature flag management with fire-and-forget semantics.
+
+toc::[]
+
+== Current Status
+
+[cols="1,3",options="header"]
+|===
+|Component |Status
+
+|**Repository Infrastructure**
+|Complete - CI/CD, multi-forge mirroring, policy enforcement
+
+|**Language Policy**
+|Complete - ReScript/Rust/Deno stack defined and enforced
+
+|**Core Implementation**
+|Not Started - Pending
+
+|**SDK**
+|Not Started - Pending
+
+|**Documentation**
+|Partial - README and ROADMAP complete, API docs pending
+|===
+
+== Phase 1: Core Library
+
+=== 1.1 Data Model (ReScript)
+
+* [ ] Flag type definitions
+** Boolean flags
+** String/enum variants
+** Percentage rollouts
+** User segment targeting
+* [ ] Targeting rules schema
+* [ ] Evaluation context types
+* [ ] Flag state serialization
+
+=== 1.2 Evaluation Engine (Rust/WASM)
+
+* [ ] High-performance flag evaluator
+* [ ] Targeting rule matcher
+* [ ] Percentage bucketing (deterministic hashing)
+* [ ] WASM compilation for edge deployment
+* [ ] ReScript bindings
+
+=== 1.3 Storage Adapters
+
+* [ ] In-memory store (default)
+* [ ] File-based persistence (JSON/TOML)
+* [ ] SQLite adapter
+* [ ] Redis adapter (optional)
+
+== Phase 2: Fire-and-Forget Runtime
+
+=== 2.1 Background Sync
+
+* [ ] Change detection and propagation
+* [ ] Conflict resolution strategy
+* [ ] Retry with exponential backoff
+* [ ] Offline queue and replay
+
+=== 2.2 Caching Layer
+
+* [ ] Multi-tier cache (memory -> disk -> remote)
+* [ ] TTL and invalidation
+* [ ] Stale-while-revalidate semantics
+* [ ] Cache warming on startup
+
+=== 2.3 Event System
+
+* [ ] Flag change events
+* [ ] Evaluation events (for analytics)
+* [ ] Audit logging
+* [ ] Webhook dispatch
+
+== Phase 3: SDK & Integrations
+
+=== 3.1 Server SDK (Gleam)
+
+* [ ] BEAM/Erlang runtime integration
+* [ ] Process-based flag caching
+* [ ] Hot flag updates without restart
+* [ ] Telemetry integration
+
+=== 3.2 Client SDK (ReScript)
+
+* [ ] Browser runtime
+* [ ] React/Dioxus hooks
+* [ ] Local evaluation mode
+* [ ] Streaming updates (SSE)
+
+=== 3.3 CLI (Rust)
+
+* [ ] `fireflag init` - Project setup
+* [ ] `fireflag set` - Set flag values
+* [ ] `fireflag get` - Query flag state
+* [ ] `fireflag sync` - Force synchronization
+* [ ] `fireflag export/import` - Bulk operations
+
+== Phase 4: Management Interface
+
+=== 4.1 Admin API (Gleam)
+
+* [ ] REST API for flag management
+* [ ] GraphQL API (optional)
+* [ ] Authentication/authorization
+* [ ] Multi-environment support
+
+=== 4.2 Web Dashboard (ReScript + Tauri)
+
+* [ ] Flag listing and search
+* [ ] Flag editor with validation
+* [ ] Targeting rule builder
+* [ ] Audit log viewer
+* [ ] Environment switcher
+
+== Phase 5: Advanced Features
+
+=== 5.1 Experimentation
+
+* [ ] A/B testing framework
+* [ ] Metric collection
+* [ ] Statistical analysis
+* [ ] Experiment scheduling
+
+=== 5.2 Governance
+
+* [ ] Change approval workflows
+* [ ] Scheduled flag changes
+* [ ] Flag lifecycle management
+* [ ] Stale flag detection
+
+=== 5.3 Observability
+
+* [ ] OpenTelemetry integration
+* [ ] Prometheus metrics
+* [ ] Distributed tracing
+* [ ] Performance dashboards
+
+== Infrastructure Complete
+
+The following infrastructure is already in place:
+
+=== CI/CD Workflows
+
+* [x] Language policy enforcement (TypeScript, Go, npm blocked)
+* [x] Security policy (no weak crypto, HTTPS only, no secrets)
+* [x] Multi-forge mirroring (GitHub, GitLab, Bitbucket, Codeberg)
+* [x] Instant sync on push/release
+* [x] OSSF Scorecard integration
+* [x] CodeQL ready (activates with source code)
+* [x] EditorConfig compliance
+* [x] SPDX header validation
+* [x] SHA-pinned dependencies enforcement
+
+=== Repository Standards
+
+* [x] Dual MIT/AGPL-3.0 licensing
+* [x] RSR (Rhodium Standard Repository) certification
+* [x] Citation documentation (BibTeX, APA, MLA, Harvard, OSCOLA)
+* [x] Development task runner (justfile)
+* [x] Palimpsest License principles (non-binding overlay)
+
+== Contributing
+
+Contributions to any phase are welcome. Priority areas:
+
+1. **Phase 1.1** - Data model design and ReScript types
+2. **Phase 1.2** - Rust evaluation engine architecture
+3. **Phase 2.1** - Fire-and-forget sync protocol design
+
+See link:README.adoc[README.adoc] for development setup and contribution guidelines.

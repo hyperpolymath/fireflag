@@ -1,6 +1,7 @@
 = fireflag
 Jonathan D.A. Jewell <jonathan.jewell@gmail.com>
 :toc: macro
+:toclevels: 3
 :icons: font
 :source-highlighter: rouge
 :experimental:
@@ -9,7 +10,186 @@ Jonathan D.A. Jewell <jonathan.jewell@gmail.com>
 :url-bitbucket: https://bitbucket.org/hyperpolymath/fireflag
 :url-codeberg: https://codeberg.org/hyperpolymath/fireflag
 
-Feature flag management with fire-and-forget semantics
+**Feature flag management with fire-and-forget semantics**
 
 image:https://img.shields.io/badge/RSR-Certified-gold[RSR Certified,link=https://github.com/hyperpolymath/rhodium-standard-repositories]
-image:https://img.shields.io/badge/License-AGPL%20v3-blue[License]
+image:https://img.shields.io/badge/License-MIT%20OR%20AGPL--3.0-blue[License]
+image:https://img.shields.io/badge/Status-Infrastructure%20Ready-yellow[Status]
+
+toc::[]
+
+== Overview
+
+fireflag is a feature flag management system designed around **fire-and-forget semantics** - set your flags and let the system handle propagation, caching, and consistency without manual intervention.
+
+=== Current Project State
+
+[IMPORTANT]
+====
+**Infrastructure Ready - Implementation Pending**
+
+This repository contains comprehensive CI/CD infrastructure, policy enforcement, and multi-forge distribution. The actual feature flag implementation is the next phase of development. See link:ROADMAP.adoc[ROADMAP.adoc] for planned work.
+====
+
+== Vision
+
+fireflag aims to provide:
+
+* **Fire-and-Forget Flag Management** - Configure once, propagate automatically
+* **Type-Safe SDK** - Built with ReScript for compile-time guarantees
+* **Edge-Ready** - Designed for distributed, low-latency evaluation
+* **Self-Hostable** - Full control over your feature flag infrastructure
+* **FOSS-First** - No vendor lock-in, dual-licensed MIT/AGPL-3.0
+
+== Repository Infrastructure
+
+The repository is production-ready with comprehensive infrastructure:
+
+=== CI/CD Workflows (12 Active)
+
+[cols="1,2",options="header"]
+|===
+|Workflow |Purpose
+
+|`rsr-antipattern.yml`
+|Enforces language policy (blocks TypeScript, Go, non-SaltStack Python)
+
+|`npm-bun-blocker.yml`
+|Blocks npm/bun artifacts in favor of Deno
+
+|`guix-nix-policy.yml`
+|Enforces Guix (primary) / Nix (fallback) package management
+
+|`security-policy.yml`
+|Blocks weak crypto, HTTP URLs, hardcoded secrets
+
+|`wellknown-enforcement.yml`
+|RFC 9116 security.txt validation
+
+|`workflow-linter.yml`
+|Validates SPDX headers, SHA-pinned actions, permissions
+
+|`instant-sync.yml`
+|Triggers forge propagation on push/release
+
+|`mirror.yml`
+|Syncs to GitLab and Bitbucket mirrors
+
+|`quality.yml`
+|File permissions, secrets scanning, TODO tracking, EditorConfig
+
+|`jekyll-gh-pages.yml`
+|Documentation site deployment
+
+|`codeql.yml`
+|Security analysis (activates with source code)
+
+|`scorecard.yml`
+|OSSF security scorecard
+|===
+
+=== Multi-Forge Distribution
+
+fireflag is mirrored across multiple forges for resilience:
+
+[horizontal]
+GitHub (Primary):: {url-github}
+GitLab:: {url-gitlab}
+Bitbucket:: {url-bitbucket}
+Codeberg:: {url-codeberg}
+
+Automatic synchronization keeps all mirrors current via `instant-sync.yml`.
+
+== Technology Stack
+
+fireflag follows the Hyperpolymath Language Policy:
+
+=== Approved Stack
+
+[cols="1,2",options="header"]
+|===
+|Technology |Use Case
+
+|**ReScript**
+|Primary application code (type-safe, compiles to JS)
+
+|**Rust**
+|Performance-critical components, CLI tools, WASM
+
+|**Deno**
+|Runtime and package management (replaces Node/npm)
+
+|**Gleam**
+|Backend services (BEAM or JS target)
+
+|**Tauri 2.0+ / Dioxus**
+|Mobile applications (Rust-first approach)
+
+|**Bash/POSIX**
+|Build scripts and automation (minimal)
+|===
+
+=== Explicitly Banned
+
+TypeScript, Node.js, npm, Bun, Go, general Python, Java, Kotlin, Swift, React Native, Flutter
+
+See link:.claude/CLAUDE.md[.claude/CLAUDE.md] for full language policy.
+
+== Development
+
+=== Prerequisites
+
+* https://deno.land/[Deno] (runtime)
+* https://github.com/casey/just[just] (task runner)
+* https://guix.gnu.org/[GNU Guix] or https://nixos.org/[Nix] (package management)
+
+=== Task Runner
+
+[source,bash]
+----
+# List available tasks
+just
+
+# Build (when implemented)
+just build
+
+# Test (when implemented)
+just test
+
+# Format code
+just fmt
+
+# Lint code
+just lint
+----
+
+== License
+
+Dual-licensed under your choice of:
+
+* **MIT License** - Maximum flexibility for most uses
+* **AGPL-3.0-or-later** - Copyleft protection for network services
+
+Additionally encourages (non-binding) adherence to https://github.com/hyperpolymath/palimpsest-license[Palimpsest License] principles around consent-based digital interaction.
+
+See link:LICENSE.txt[LICENSE.txt] for full terms.
+
+== Contributing
+
+Contributions welcome! Please ensure:
+
+* Code follows the approved technology stack
+* All CI checks pass
+* SPDX license headers on new files
+* SHA-pinned dependencies
+
+== Citation
+
+See link:docs/CITATIONS.adoc[docs/CITATIONS.adoc] for citation formats (BibTeX, APA, MLA, Harvard, OSCOLA).
+
+== Links
+
+* link:ROADMAP.adoc[Development Roadmap]
+* link:docs/CITATIONS.adoc[Citation Guide]
+* link:.claude/CLAUDE.md[Language Policy]
+* https://github.com/hyperpolymath/rhodium-standard-repositories[RSR Framework]

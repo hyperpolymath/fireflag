@@ -1,0 +1,509 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2024 Jonathan D.A. Jewell <hyperpolymath>
+= Fire-and-Forget Flag Semantics
+:author: Jonathan D.A. Jewell
+:revdate: 2024
+:toc: left
+:toclevels: 3
+:sectnums:
+:source-highlighter: rouge
+
+== Overview
+
+Fire-and-forget flags are feature flags designed for **minimal operational overhead**.
+Once configured, the system handles propagation, caching, and eventual consistency automatically.
+Clients receive flag values without requiring persistent connections or complex coordination.
+
+=== Design Principles
+
+1. **Fire Once**: Configure a flag value; the system propagates it
+2. **Forget Coordination**: No distributed locks or consensus required for reads
+3. **Eventual Consistency**: Changes propagate within bounded time
+4. **Self-Healing**: Stale data automatically expires and refreshes
+5. **Audit Everything**: All changes are immutably logged
+
+== Flag Types
+
+=== Boolean Flag
+
+The simplest flag type. Returns `true` or `false`.
+
+[source,rescript]
+----
+type booleanFlag = {
+  key: string,
+  value: bool,
+  defaultValue: bool,
+}
+----
+
+=== String Variant Flag
+
+Returns one of a predefined set of string values.
+
+[source,rescript]
+----
+type variantFlag = {
+  key: string,
+  value: string,
+  variants: array<string>,
+  defaultValue: string,
+}
+----
+
+=== Percentage Rollout Flag
+
+Enables a feature for a percentage of users using consistent hashing.
+
+[source,rescript]
+----
+type rolloutFlag = {
+  key: string,
+  percentage: float,  // 0.0 to 100.0
+  hashSeed: string,   // For consistent bucketing
+}
+----
+
+=== Segment Flag
+
+Targets specific user segments based on attributes.
+
+[source,rescript]
+----
+type segmentFlag = {
+  key: string,
+  rules: array<targetingRule>,
+  fallthrough: flagValue,
+}
+----
+
+== Consistency Model
+
+=== Eventual Consistency Guarantees
+
+Fire-and-forget flags use **eventual consistency** with the following guarantees:
+
+[cols="1,3"]
+|===
+| Property | Guarantee
+
+| **Propagation Bound**
+| Changes propagate to all nodes within `maxPropagationDelay` (default: 30 seconds)
+
+| **Monotonic Reads**
+| A client that reads version N will never subsequently read version < N
+
+| **Read-Your-Writes**
+| A client that writes a value will immediately see that value locally
+
+| **Causally Consistent**
+| If change A caused change B, all clients see A before B
+|===
+
+=== Version Vector
+
+Each flag maintains a version vector for conflict resolution:
+
+[source,rescript]
+----
+type versionVector = {
+  version: int,           // Monotonically increasing
+  timestamp: float,       // Unix epoch milliseconds
+  nodeId: string,         // Origin node identifier
+  checksum: string,       // SHA-256 of value
+}
+----
+
+=== Conflict Resolution
+
+When concurrent updates occur:
+
+1. **Higher version wins**: Larger `version` number takes precedence
+2. **Timestamp tiebreaker**: If versions equal, later `timestamp` wins
+3. **Node ID tiebreaker**: If timestamps equal, lexicographically larger `nodeId` wins
+4. **Checksum verification**: Ensures data integrity after resolution
+
+[source,rescript]
+----
+let resolveConflict = (a: versionVector, b: versionVector): versionVector => {
+  if a.version != b.version {
+    a.version > b.version ? a : b
+  } else if a.timestamp != b.timestamp {
+    a.timestamp > b.timestamp ? a : b
+  } else {
+    a.nodeId > b.nodeId ? a : b
+  }
+}
+----
+
+== Expiry & TTL
+
+=== Time-To-Live (TTL)
+
+Every flag value has an associated TTL controlling cache validity:
+
+[source,rescript]
+----
+type ttlConfig = {
+  defaultTtl: float,      // Default: 300000ms (5 minutes)
+  minTtl: float,          // Minimum: 1000ms (1 second)
+  maxTtl: float,          // Maximum: 86400000ms (24 hours)
+  staleTtl: float,        // Serve stale while revalidating: 60000ms
+}
+----
+
+=== Expiry Behavior
+
+[cols="1,2,2"]
+|===
+| State | Condition | Behavior
+
+| **Fresh**
+| `age < ttl`
+| Serve immediately, no revalidation
+
+| **Stale**
+| `ttl ≤ age < ttl + staleTtl`
+| Serve immediately, trigger background revalidation
+
+| **Expired**
+| `age ≥ ttl + staleTtl`
+| Block until revalidation completes, or return default
+|===
+
+=== Expiry Policies
+
+[source,rescript]
+----
+type expiryPolicy =
+  | @as("absolute") Absolute     // Expires at fixed time
+  | @as("sliding") Sliding       // TTL resets on each access
+  | @as("adaptive") Adaptive     // TTL adjusts based on change frequency
+----
+
+**Adaptive TTL Algorithm**:
+
+[source]
+----
+adaptiveTtl = baseTtl * (1 + stabilityFactor)
+stabilityFactor = min(timeSinceLastChange / baseTtl, maxMultiplier)
+----
+
+Flags that rarely change get longer TTLs; frequently changing flags get shorter TTLs.
+
+== Audit Logging
+
+=== Audit Event Types
+
+All flag operations produce immutable audit events:
+
+[source,rescript]
+----
+type auditEventType =
+  | @as("created") Created
+  | @as("updated") Updated
+  | @as("deleted") Deleted
+  | @as("evaluated") Evaluated
+  | @as("expired") Expired
+  | @as("synced") Synced
+  | @as("conflict_resolved") ConflictResolved
+----
+
+=== Audit Record Structure
+
+[source,rescript]
+----
+type auditRecord = {
+  id: string,                    // UUID v7 (time-sortable)
+  timestamp: float,              // Unix epoch milliseconds
+  eventType: auditEventType,
+  flagKey: string,
+  previousValue: option<string>, // JSON-encoded previous state
+  newValue: option<string>,      // JSON-encoded new state
+  actor: auditActor,
+  context: auditContext,
+  checksum: string,              // SHA-256 of record contents
+}
+
+type auditActor = {
+  actorType: actorType,          // "user" | "system" | "api"
+  actorId: string,
+  ipAddress: option<string>,
+}
+
+type auditContext = {
+  nodeId: string,
+  environment: string,           // "production" | "staging" | "development"
+  userAgent: option<string>,
+  correlationId: option<string>,
+}
+----
+
+=== Audit Guarantees
+
+[cols="1,3"]
+|===
+| Property | Guarantee
+
+| **Immutability**
+| Audit records are append-only and cannot be modified
+
+| **Completeness**
+| Every state change produces exactly one audit record
+
+| **Ordering**
+| Records are globally orderable by UUID v7 timestamp component
+
+| **Integrity**
+| Each record includes SHA-256 checksum for tamper detection
+
+| **Retention**
+| Configurable retention period (default: 90 days, minimum: 7 days)
+|===
+
+=== Audit Query Interface
+
+[source,rescript]
+----
+type auditQuery = {
+  flagKey: option<string>,
+  eventTypes: option<array<auditEventType>>,
+  actorId: option<string>,
+  startTime: option<float>,
+  endTime: option<float>,
+  limit: int,              // Default: 100, max: 1000
+  cursor: option<string>,  // For pagination
+}
+----
+
+== Evaluation Semantics
+
+=== Evaluation Order
+
+Flag evaluation follows strict precedence:
+
+1. **Kill Switch Override**: If flag is disabled, return default immediately
+2. **User Override**: Check for user-specific override
+3. **Segment Rules**: Evaluate targeting rules in order
+4. **Percentage Rollout**: Apply consistent hashing for rollouts
+5. **Fallthrough**: Return fallthrough value
+6. **Default**: Return flag's default value
+
+=== Consistent Hashing for Rollouts
+
+[source,rescript]
+----
+let evaluateRollout = (
+  ~flagKey: string,
+  ~userId: string,
+  ~percentage: float,
+  ~seed: string,
+): bool => {
+  let hashInput = `${seed}:${flagKey}:${userId}`
+  let hash = sha256(hashInput)
+  let bucket = (hexToInt(hash->String.slice(~start=0, ~end=8)) mod 10000) / 100.0
+  bucket < percentage
+}
+----
+
+Properties:
+- **Consistent**: Same user always gets same result for same flag
+- **Uniform**: Users distributed uniformly across buckets
+- **Independent**: Different flags produce independent assignments
+
+=== Evaluation Context
+
+[source,rescript]
+----
+type evaluationContext = {
+  userId: option<string>,
+  sessionId: option<string>,
+  attributes: Js.Dict.t<string>,  // Custom attributes for targeting
+  timestamp: float,
+}
+----
+
+== Network Behavior
+
+=== Fire-and-Forget Protocol
+
+[source]
+----
+Client                          Server
+  |                                |
+  |-------- GET /flags ----------->|  Initial fetch
+  |<------- Flag bundle -----------|  All flags + version vector
+  |                                |
+  |  (Cache locally, evaluate)     |
+  |                                |
+  |-------- HEAD /flags?v=N ------>|  Periodic check (if-none-match)
+  |<------- 304 Not Modified ------|  No changes
+  |                                |
+  |-------- HEAD /flags?v=N ------>|  Periodic check
+  |<------- 200 + Delta -----------|  Changed flags only
+  |                                |
+  |  (Merge delta, update cache)   |
+  |                                |
+----
+
+=== Sync Configuration
+
+[source,rescript]
+----
+type syncConfig = {
+  pollInterval: float,      // Default: 30000ms (30 seconds)
+  minPollInterval: float,   // Minimum: 5000ms (5 seconds)
+  maxPollInterval: float,   // Maximum: 300000ms (5 minutes)
+  backoffMultiplier: float, // On error: 2.0
+  maxBackoff: float,        // Maximum backoff: 60000ms
+  jitter: float,            // Random jitter: 0.0 to 0.1 (10%)
+}
+----
+
+=== Offline Behavior
+
+When the server is unreachable:
+
+1. **Serve from cache**: Use cached values until TTL + staleTtl expires
+2. **Exponential backoff**: Reduce server load during outages
+3. **Default fallback**: Return default values when cache fully expires
+4. **Auto-recovery**: Resume normal polling when server returns
+
+== Storage Model
+
+=== Flag Store Interface
+
+[source,rescript]
+----
+module type FlagStore = {
+  let get: string => Promise.t<option<flagWithMeta>>
+  let set: (string, flagWithMeta) => Promise.t<unit>
+  let delete: string => Promise.t<bool>
+  let list: unit => Promise.t<array<flagWithMeta>>
+  let getVersion: unit => Promise.t<versionVector>
+  let compact: unit => Promise.t<unit>
+}
+----
+
+=== Multi-Tier Cache
+
+[source]
+----
+┌─────────────────┐
+│   L1: Memory    │  < 1ms latency, limited size
+├─────────────────┤
+│   L2: Disk      │  < 10ms latency, persistent
+├─────────────────┤
+│   L3: Remote    │  < 100ms latency, source of truth
+└─────────────────┘
+----
+
+== Error Handling
+
+=== Error Types
+
+[source,rescript]
+----
+type flagError =
+  | @as("not_found") NotFound
+  | @as("invalid_type") InvalidType
+  | @as("evaluation_error") EvaluationError
+  | @as("storage_error") StorageError
+  | @as("network_error") NetworkError
+  | @as("expired") Expired
+  | @as("conflict") Conflict
+----
+
+=== Error Recovery
+
+[cols="1,2"]
+|===
+| Error | Recovery Strategy
+
+| `NotFound`
+| Return default value, log warning
+
+| `InvalidType`
+| Return default value, log error, alert
+
+| `EvaluationError`
+| Return default value, log error with context
+
+| `StorageError`
+| Fall back to in-memory cache, retry with backoff
+
+| `NetworkError`
+| Serve stale data, exponential backoff
+
+| `Expired`
+| Serve stale if within staleTtl, else default
+
+| `Conflict`
+| Apply conflict resolution, log resolution
+|===
+
+== Security Considerations
+
+=== Data Integrity
+
+- All flag values are checksummed (SHA-256)
+- Audit records include integrity checksums
+- Version vectors prevent rollback attacks
+
+=== Access Control
+
+[source,rescript]
+----
+type permission =
+  | @as("read") Read           // Evaluate flags
+  | @as("write") Write         // Create/update flags
+  | @as("delete") Delete       // Delete flags
+  | @as("audit") Audit         // View audit logs
+  | @as("admin") Admin         // Manage permissions
+
+type accessToken = {
+  tokenId: string,
+  permissions: array<permission>,
+  environments: array<string>,  // Allowed environments
+  expiresAt: float,
+}
+----
+
+=== Transport Security
+
+- All network communication over HTTPS (TLS 1.3)
+- No HTTP fallback
+- Certificate pinning recommended for mobile clients
+
+== Appendix: Configuration Reference
+
+[source,rescript]
+----
+type fireflagConfig = {
+  // Storage
+  storageAdapter: storageAdapter,
+
+  // Caching
+  cacheConfig: {
+    l1MaxSize: int,           // Default: 1000 flags
+    l2Path: option<string>,   // Disk cache path
+    ttl: ttlConfig,
+  },
+
+  // Sync
+  syncConfig: syncConfig,
+
+  // Audit
+  auditConfig: {
+    enabled: bool,            // Default: true
+    retentionDays: int,       // Default: 90
+    evaluationLogging: bool,  // Default: false (high volume)
+  },
+
+  // Security
+  securityConfig: {
+    requireHttps: bool,       // Default: true
+    tokenValidation: bool,    // Default: true
+  },
+}
+----

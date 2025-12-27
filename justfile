@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # fireflag - Development Tasks
 set shell := ["bash", "-uc"]
 set dotenv-load := true
@@ -8,22 +9,36 @@ project := "fireflag"
 default:
     @just --list --unsorted
 
-# Build
+# Build ReScript sources
 build:
-    @echo "TODO: Add build command"
+    deno run -A npm:rescript build
 
-# Test
-test:
-    @echo "TODO: Add test command"
+# Build in watch mode
+watch:
+    deno run -A npm:rescript build -w
 
-# Clean
+# Clean build artifacts
 clean:
-    @echo "TODO: Add clean command"
+    deno run -A npm:rescript clean
+    rm -rf src/**/*.res.js src/**/*.bs.js
 
-# Format
+# Format ReScript code
 fmt:
-    @echo "TODO: Add format command"
+    deno run -A npm:rescript format src/**/*.res
 
-# Lint
+# Type check
+check:
+    deno run -A npm:rescript build
+
+# Run tests
+test:
+    deno test --allow-read
+
+# Run example
+example:
+    deno run --allow-read src/example.js
+
+# Lint (placeholder for future rescript-eslint)
 lint:
-    @echo "TODO: Add lint command"
+    @echo "Lint: Type checking via rescript build"
+    deno run -A npm:rescript build

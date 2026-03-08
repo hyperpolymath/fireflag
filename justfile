@@ -158,3 +158,8 @@ optimize-screenshots:
 full-build: check-proofs build icons lint-ext security-scan build-ext
     @echo "✓ Full build complete"
     @ls -lh extension/web-ext-artifacts/
+
+# [AUTO-GENERATED] Multi-arch / RISC-V target
+build-riscv:
+	@echo "Building for RISC-V..."
+	cross build --target riscv64gc-unknown-linux-gnu

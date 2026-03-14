@@ -89,7 +89,7 @@ development
 
 **Support Email:**
 ```
-jonathan.jewell@open.ac.uk
+j.d.a.jewell@open.ac.uk
 ```
 
 **Support URL:**

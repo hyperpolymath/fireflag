@@ -151,7 +151,7 @@ export MOZILLA_API_SECRET=your_secret
    - Upload 7 screenshots with captions
    - Privacy policy (link or paste)
    - Homepage: https://github.com/hyperpolymath/fireflag
-   - Support: jonathan.jewell@open.ac.uk
+   - Support: j.d.a.jewell@open.ac.uk
 5. Add developer comments (copy from MOZILLA-LISTING.md)
 6. Submit for review
 
@@ -256,7 +256,7 @@ Extension is ready for submission when:
 ## 📞 Support
 
 - **Developer:** Jonathan D.A. Jewell
-- **Email:** jonathan.jewell@open.ac.uk
+- **Email:** j.d.a.jewell@open.ac.uk
 - **GitHub:** https://github.com/hyperpolymath/fireflag
 - **Issues:** https://github.com/hyperpolymath/fireflag/issues
 

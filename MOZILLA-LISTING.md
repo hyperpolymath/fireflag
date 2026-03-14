@@ -141,7 +141,7 @@ All optional permissions can be granted/revoked anytime through Firefox's permis
 
 ### 🆘 Support
 
-- Email: jonathan.jewell@open.ac.uk
+- Email: j.d.a.jewell@open.ac.uk
 - GitHub Issues: https://github.com/hyperpolymath/fireflag/issues
 - Response time: Within 7 days
 
@@ -401,7 +401,7 @@ extension/
 ### Contact
 
 Developer: Jonathan D.A. Jewell
-Email: jonathan.jewell@open.ac.uk
+Email: j.d.a.jewell@open.ac.uk
 GitHub: https://github.com/hyperpolymath
 
 ---

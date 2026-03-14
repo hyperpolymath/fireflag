@@ -6,29 +6,29 @@
 [source,bibtex]
 ----
 @software{fireflag_2025,
-  author = {Polymath, Hyper},
+  author = {Jewell, Jonathan D.A.},
   title = {fireflag},
   year = {2025},
   url = {https://github.com/hyperpolymath/fireflag},
-  license = {AGPL-3.0-or-later}
+  license = {MPL-2.0}
 }
 ----
 
 == Harvard Style
 
-Polymath, H. (2025) _fireflag_ [Computer software]. Available at: https://github.com/hyperpolymath/fireflag
+Jewell, J.D.A. (2025) _fireflag_ [Computer software]. Available at: https://github.com/hyperpolymath/fireflag
 
 == OSCOLA
 
-Hyper Polymath, 'fireflag' (2025) <https://github.com/hyperpolymath/fireflag>
+Jonathan D.A. Jewell, 'fireflag' (2025) <https://github.com/hyperpolymath/fireflag>
 
 == MLA
 
-Polymath, Hyper. "fireflag." 2025, github.com/hyperpolymath/fireflag.
+Jewell, Jonathan D.A. "fireflag." 2025, github.com/hyperpolymath/fireflag.
 
 == APA 7
 
-Polymath, H. (2025). _fireflag_ [Computer software]. GitHub. https://github.com/hyperpolymath/fireflag
+Jewell, J.D.A. (2025). _fireflag_ [Computer software]. GitHub. https://github.com/hyperpolymath/fireflag
 
 == See Also
 

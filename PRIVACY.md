@@ -14,7 +14,7 @@ FireFlag is a Firefox browser extension that helps users safely manage browser f
 
 - **Extension Name:** FireFlag
 - **Developer:** Jonathan D.A. Jewell
-- **Contact:** jonathan.jewell@open.ac.uk
+- **Contact:** j.d.a.jewell@open.ac.uk
 - **Source Code:** https://github.com/hyperpolymath/fireflag
 - **License:** MPL-2.0 (Mozilla Public License 2.0)
 
@@ -342,7 +342,7 @@ FireFlag uses reproducible builds:
 ### Privacy Questions
 
 For privacy-related questions:
-- **Email:** jonathan.jewell@open.ac.uk
+- **Email:** j.d.a.jewell@open.ac.uk
 - **GitHub Issues:** https://github.com/hyperpolymath/fireflag/issues
 - **Response Time:** Within 7 days
 
@@ -356,7 +356,7 @@ To exercise your privacy rights (though not needed for local data):
 ### Security Vulnerabilities
 
 To report security issues:
-- **Email:** jonathan.jewell@open.ac.uk (GPG key available on request)
+- **Email:** j.d.a.jewell@open.ac.uk (GPG key available on request)
 - **GitHub:** Security tab (private disclosure)
 - **Bug Bounty:** None currently
 

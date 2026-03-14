@@ -168,7 +168,7 @@ diff submitted.txt built.txt
 
 ## Support
 
-- **Author:** Jonathan D.A. Jewell <jonathan.jewell@open.ac.uk>
+- **Author:** Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 - **Repository:** https://github.com/hyperpolymath/fireflag
 - **Issues:** https://github.com/hyperpolymath/fireflag/issues
 

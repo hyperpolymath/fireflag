@@ -154,7 +154,7 @@ FireFlag is open source software. You can audit our privacy claims by reviewing 
 ## Contact
 
 For privacy-related questions or concerns:
-- **Email:** jonathan.jewell@open.ac.uk
+- **Email:** j.d.a.jewell@open.ac.uk
 - **GitHub Issues:** https://github.com/hyperpolymath/fireflag/issues
 
 ## Transparency

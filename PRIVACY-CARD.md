@@ -88,7 +88,7 @@
 ## 📞 Contact
 
 **Privacy Questions?**
-- Email: jonathan.jewell@open.ac.uk
+- Email: j.d.a.jewell@open.ac.uk
 - GitHub: https://github.com/hyperpolymath/fireflag/issues
 - Response: Within 7 days
 

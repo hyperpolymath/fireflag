@@ -107,7 +107,7 @@
   - Login with Firefox Account
 - [ ] **ACTION REQUIRED:** Set up developer profile
   - Display name: Jonathan D.A. Jewell
-  - Email: jonathan.jewell@open.ac.uk (must be verified)
+  - Email: j.d.a.jewell@open.ac.uk (must be verified)
   - Homepage: https://github.com/hyperpolymath
 - [ ] Accept developer agreement
 - [ ] Verify email address
@@ -126,7 +126,7 @@
 3. **Summary:** Copy from MOZILLA-LISTING.md (Summary section)
 4. **Description:** Copy from MOZILLA-LISTING.md (Description section)
 5. **Homepage:** https://github.com/hyperpolymath/fireflag
-6. **Support email:** jonathan.jewell@open.ac.uk
+6. **Support email:** j.d.a.jewell@open.ac.uk
 7. **Support URL:** https://github.com/hyperpolymath/fireflag/issues
 8. **Privacy policy:** Copy from PRIVACY.md or link to GitHub
 9. **License:** Mozilla Public License 2.0 (MPL-2.0)

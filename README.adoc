@@ -277,9 +277,9 @@ fireflag/
 ├── .containerization/      # Docker + Guix builds
 ├── .screenshots/           # Screenshot generation
 ├── scripts/                # Build and signing scripts
-├── STATE.scm               # Project state tracking
-├── ECOSYSTEM.scm           # Ecosystem relationships
-└── META.scm                # Architecture decisions
+├── .machine_readable/6a2/STATE.a2ml               # Project state tracking
+├── .machine_readable/6a2/ECOSYSTEM.a2ml           # Ecosystem relationships
+└── .machine_readable/6a2/META.a2ml                # Architecture decisions
 ----
 
 === Build System

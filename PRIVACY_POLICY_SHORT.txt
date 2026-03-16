@@ -45,7 +45,7 @@ TRANSPARENCY:
 - Auditable code
 - Formally verified core components
 
-CONTACT: jonathan.jewell@open.ac.uk
+CONTACT: j.d.a.jewell@open.ac.uk
 
 Full policy: https://github.com/hyperpolymath/fireflag/blob/main/PRIVACY_POLICY.md
 

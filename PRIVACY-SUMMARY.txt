@@ -43,7 +43,7 @@ Open Source:
 
 Contact:
 • Developer: Jonathan D.A. Jewell
-• Email: jonathan.jewell@open.ac.uk
+• Email: j.d.a.jewell@open.ac.uk
 • Issues: https://github.com/hyperpolymath/fireflag/issues
 
 Full Privacy Policy: https://github.com/hyperpolymath/fireflag/blob/main/PRIVACY.md

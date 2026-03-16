@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Clade declaration — part of the gv-clade-index registry
+# See: https://github.com/hyperpolymath/gv-clade-index
+
+[identity]
+uuid = "035e19ce-0c49-5b86-b62d-135819aaa9ba"
+primary-forge = "github"
+primary-owner = "hyperpolymath"
+canonical-name = "fireflag"
+prefixed-name = "sc-fireflag"
+
+[clade]
+primary = "sc"
+secondary = []
+assigned = "2026-03-16"
+rationale = ""
+
+[forges]
+github = "hyperpolymath/fireflag"
+gitlab = "hyperpolymath/fireflag"
+bitbucket = "hyperpolymath/fireflag"
+
+[lineage]
+type = "standalone"
+parent = "Feature flag security tool"
+born = "2026-03-16"

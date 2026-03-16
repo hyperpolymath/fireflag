@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-// Copyright (C) 2026 Jonathan D.A. Jewell <jonathan.jewell@open.ac.uk>
+// Copyright (C) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 /**
  * DOM utility functions for safe HTML manipulation

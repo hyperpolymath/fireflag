@@ -10,7 +10,8 @@ on:
     paths:
       - 'extension/data/flags-database.json'
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   detect-mozilla-changes:

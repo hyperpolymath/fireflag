@@ -60,7 +60,7 @@
 
 **Option A: Automated (Recommended)**
 ```bash
-cd /var/mnt/eclipse/repos/fireflag
+cd /var$REPOS_DIR/fireflag
 just capture-screenshots
 ```
 Then follow interactive prompts to position UI elements.

@@ -144,7 +144,7 @@ Upload these screenshots (if you have them):
 3. DevTools panel
 4. Options page
 
-**Screenshot locations:** `/var/mnt/eclipse/repos/fireflag/screenshots/` (if they exist)
+**Screenshot locations:** `/var$REPOS_DIR/fireflag/screenshots/` (if they exist)
 
 ## Version Notes (for reviewers)
 

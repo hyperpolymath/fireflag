@@ -5,7 +5,7 @@
 If you have API credentials, run:
 
 ```bash
-cd /var/mnt/eclipse/repos/fireflag/extension
+cd /var$REPOS_DIR/fireflag/extension
 
 npx web-ext sign \
   --channel=listed \

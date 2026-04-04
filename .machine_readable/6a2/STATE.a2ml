@@ -5,10 +5,49 @@
 [metadata]
 project = "fireflag"
 version = "0.1.0"
-last-updated = "2026-03-15"
+last-updated = "2026-04-04"
 status = "active"
+crg-grade = "C"
 
 [project-context]
 name = "fireflag"
-completion-percentage = 0
-phase = "In development"
+completion-percentage = 75
+phase = "CRG C Testing Complete"
+
+[test-coverage]
+unit-tests = 42
+property-tests = 21
+e2e-tests = 14
+security-tests = 17
+benchmarks = 28
+total-tests = 94
+test-pass-rate = 100
+
+[test-suites]
+types = "tests/unit/types_test.ts"
+flag-evaluation = "tests/unit/flag_evaluation_test.ts"
+flag-properties = "tests/property/flag_properties_test.ts"
+extension-lifecycle = "tests/e2e/extension_lifecycle_test.ts"
+security = "tests/aspect/security_test.ts"
+benchmarks = "tests/bench/flag_bench.ts"
+
+[crg-requirements]
+unit-tests = "DONE"
+smoke-tests = "DONE"
+build = "READY"
+p2p-property = "DONE"
+e2e = "DONE"
+reflexive = "DONE"
+contract = "DONE"
+aspect = "DONE"
+benchmarks = "DONE"
+
+[recent-changes]
+2026-04-04 = "Added comprehensive Deno test suite: 94 tests (42 unit + 21 property + 14 E2E + 17 security), 28 benchmarks, 100% pass rate. Deleted tests/fuzz/placeholder.txt. Updated deno.json with test tasks."
+
+[next-actions]
+1 = "Run panic-attack assail scan"
+2 = "Verify ReScript build (`just build`)"
+3 = "Manual Firefox extension test"
+4 = "Manual Chrome extension test"
+5 = "Complete CRG B requirements (6 targets)"

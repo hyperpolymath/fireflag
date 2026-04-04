@@ -1,0 +1,16 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.220.0/",
+    "std/assert": "https://deno.land/std@0.220.0/assert/mod.ts",
+    "std/testing/": "https://deno.land/std@0.220.0/testing/"
+  },
+  "tasks": {
+    "test": "deno test --allow-read tests/",
+    "test:unit": "deno test --allow-read tests/unit/",
+    "test:property": "deno test --allow-read tests/property/",
+    "test:e2e": "deno test --allow-read tests/e2e/",
+    "test:aspect": "deno test --allow-read tests/aspect/",
+    "test:bench": "deno bench tests/bench/",
+    "test:all": "deno test --allow-read tests/ && deno bench tests/bench/"
+  }
+}

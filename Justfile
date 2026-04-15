@@ -3,6 +3,8 @@
 set shell := ["bash", "-uc"]
 set dotenv-load := true
 
+import? "contractile.just"
+
 project := "fireflag"
 
 # Show all recipes

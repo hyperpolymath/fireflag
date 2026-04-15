@@ -5,6 +5,7 @@
   "description": "Manage Firefox and Gecko browser flags safely - experiment with about:config and experimental features with confidence",
   "author": "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>",
   "homepage_url": "https://github.com/hyperpolymath/fireflag",
+  "privacy_policy_url": "https://hyperpolymath.github.io/fireflag/PRIVACY.html",
 
   "icons": {
     "16": "icons/fireflag-16.png",

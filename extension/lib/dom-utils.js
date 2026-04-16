@@ -5,6 +5,11 @@
  * DOM utility functions for safe HTML manipulation
  * Replaces innerHTML with safer alternatives
  * Global functions (no modules) for browser extension compatibility
+ *
+ * Security Notes:
+ * - Uses template elements to prevent script injection
+ * - All content is controlled by the extension (no user input)
+ * - CSP restricts script sources to 'self'
  */
 
 /**
@@ -38,6 +43,25 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+/**
+ * Sanitize URL for safe use in extension UI
+ * @param {string} url - URL to sanitize
+ * @returns {string} - Sanitized URL or empty string if invalid
+ */
+function sanitizeUrl(url) {
+  try {
+    const parsed = new URL(url);
+    // Only allow http, https, and extension protocols
+    if (['http:', 'https:', 'moz-extension:'].includes(parsed.protocol)) {
+      return parsed.href;
+    }
+    return '';
+  } catch (e) {
+    return '';
+  }
+}
+
 // Make functions globally available
 window.safeSetHTML = safeSetHTML;
 window.escapeHtmlUtil = escapeHtml;
+window.sanitizeUrl = sanitizeUrl;

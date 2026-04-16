@@ -93,19 +93,26 @@ FireFlag is **free and open source**. Support the project by:
 
 ## Screenshots
 
-*(Note: Add actual screenshot URLs after GitHub Pages is enabled)*
-
 1. **Browser Action Popup** - Quick flag access
-   ![Browser Action Popup](https://hyperpolymath.github.io/fireflag/screenshots/popup.png)
+   ![Browser Action Popup](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/01-popup-overview.png)
 
-2. **Sidebar Panel** - Detailed flag information
-   ![Sidebar Panel](https://hyperpolymath.github.io/fireflag/screenshots/sidebar.png)
+2. **Popup Flag Detail** - View flag documentation
+   ![Popup Flag Detail](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/02-popup-flag-detail.png)
 
-3. **DevTools Integration** - Performance metrics
-   ![DevTools Integration](https://hyperpolymath.github.io/fireflag/screenshots/devtools.png)
+3. **Sidebar Flags Tab** - Manage all flags
+   ![Sidebar Flags Tab](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/03-sidebar-flags.png)
 
-4. **Export Reports** - Share your configuration
-   ![Export Reports](https://hyperpolymath.github.io/fireflag/screenshots/export.png)
+4. **Sidebar History** - Track your changes
+   ![Sidebar History](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/04-sidebar-history.png)
+
+5. **Options Page** - Configure FireFlag
+   ![Options Page](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/05-options.png)
+
+6. **DevTools Integration** - Performance metrics
+   ![DevTools Integration](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/06-devtools.png)
+
+7. **Permission Dialog** - Granular control
+   ![Permission Dialog](https://raw.githubusercontent.com/hyperpolymath/fireflag/main/.screenshots/store/07-permission-dialog.png)
 
 ---
 

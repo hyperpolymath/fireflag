@@ -1,0 +1,648 @@
+// SPDX-License-Identifier: PMPL-1.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+
+= FireFlag — CRG Audit (2026-04-18)
+Jonathan D.A. Jewell
+2026-04-18
+:toc:
+:sectnums:
+
+== Scope and Standard
+
+Evaluates the `fireflag` repository (verification-ecosystem submodule) against
+*Component Readiness Grades v2.0 (STRICT)*, 2026-03-30 revision. FireFlag
+was queued in this session's audit wave as a "plausibly defensible" self-declared
+C — STATE.a2ml's numerical claims are internally consistent, so it merits full
+evidence review.
+
+- Standard: `standards/component-readiness-grades/COMPONENT-READINESS-GRADES.md`
+- Criteria boilerplate: `rsr-template-repo/docs/governance/CRG-CRITERIA.adoc`
+- Audit template: `rsr-template-repo/docs/governance/CRG-AUDIT-TEMPLATE.adoc`
+- Self-declared grade (prior art):
+  * `.machine_readable/6a2/STATE.a2ml` `[metadata] crg-grade = "C"`,
+    `[project-context] phase = "CRG C Testing Complete"`,
+    `completion-percentage = 75`, last-updated 2026-04-04.
+  * `README.adoc` — "**Completion:** 99%" + "Ready for Mozilla Add-ons
+    Submission" badge. (Note the 75 vs 99 internal contradiction.)
+  * `EXPLAINME.adoc` — claims dogfooding across gossamer, neurophone,
+    vscode-k9.
+- Audit date: 2026-04-18
+- Auditor: Jonathan D.A. Jewell
+
+Schema note: fireflag uses the *flat* `crg-grade = "C"` under `[metadata]`
+form — HYP-S005 matches it. No rule drift.
+
+The audit grades the repo *as-is today*, not aspirationally.
+
+== v2.0 Strictness Recap
+
+[cols="1,3,4"]
+|===
+| Grade | Release Stage | Hard Requirement (v2.0)
+
+| X | None             | Untested.
+| F | Reject           | Harmful, wasteful, or superseded.
+| E | Pre-alpha        | >=1 test, failures documented.
+| D | Alpha            | Test matrix + scope documented + *RSR compliance mandatory*.
+| C | Alpha-stable     | Dogfooded, CI green, *deep per-file + per-directory annotation*.
+| B | Beta             | 6+ *diverse* external targets, issues fed back.
+| A | Stable           | Real-world external feedback confirms value; no harm.
+|===
+
+Publication requires B+. Long alpha is discipline, not shame.
+
+== Evidence Inventory (verified 2026-04-18)
+
+=== Structural compliance
+
+[cols="2,1,3"]
+|===
+| Item | State | Source
+
+| RSR mandatory workflows (17+)
+| PRESENT (24 YAML files)
+| `.github/workflows/` — includes codeql, scorecard, quality, mirror,
+  instant-sync, guix-nix-policy, rsr-antipattern, security-policy,
+  wellknown-enforcement, workflow-linter, npm-bun-blocker, ts-blocker,
+  secret-scanner, scorecard-enforcer, hypatia-scan, svalin-scan,
+  vordr-verify, selur-secrets, boj-build, container-build,
+  dependabot-automerge, casket-pages, dogfood-gate, update-flag-database
+
+| `.machine_readable/6a2/` canonical A2ML
+| PRESENT (all 6: STATE, META, ECOSYSTEM, AGENTIC, NEUROSYM, PLAYBOOK)
+| 133 lines total. STATE.a2ml (53 lines) is substantive. META (9 lines),
+  ECOSYSTEM (10), PLAYBOOK (23), AGENTIC (24), NEUROSYM (14) are all
+  near-empty stubs with section headers and no content.
+
+| `0-AI-MANIFEST.a2ml`
+| PRESENT (4808 bytes)
+| Root
+
+| `README.adoc`, `EXPLAINME.adoc`, `CONTRIBUTING.md`, `SECURITY.md`,
+  `MAINTAINERS.adoc`, `CODE_OF_CONDUCT.md`, `ROADMAP.adoc`,
+  `RSR_OUTLINE.adoc`, `PALIMPSEST.adoc`
+| PRESENT
+| Root
+
+| `docs/` orientation subtree
+| PARTIAL — `docs/SEMANTICS.adoc` (substantive),
+  `docs/CITATIONS.adoc`, `docs/accessibility/README.adoc`,
+  `docs/compliance/ACCESSIBILITY.adoc`,
+  `docs/reports/security/*.json`
+| No `docs/architecture/`, `docs/decisions/` (ADRs),
+  `docs/governance/` (until this audit), `docs/integration/`,
+  `docs/practice/`, `docs/specification/`. Thinner than gossamer's
+  C-grade annotation bar.
+
+| `LICENSE` + `LICENSES/` directory
+| PRESENT (LICENSE 18 KB, `LICENSES/PMPL-1.0-or-later.txt`,
+  `LICENSES/MPL-2.0.txt`)
+| Good hygiene. LICENSE is MPL-2.0 text (platform-required for Firefox
+  extension store per Rule 2 fallback). PMPL-1.0-or-later preferred per
+  STATE `[metadata] license` and META.a2ml.
+
+| `guix.scm` + `flake.nix`
+| PRESENT (both)
+| Root — guix.scm 3365 bytes, flake.nix 3540 bytes
+
+| `.well-known/` (security.txt, ai.txt, humans.txt, groove/)
+| PRESENT (all three + groove/ subdir)
+| `.well-known/`
+
+| SPDX headers on source
+| PRESENT on all sampled source — all `.js`, `.res`, `.idr`, `.ts`
+  test files carry headers
+| Extension JS + ReScript + Idris2 carry
+  `MPL-2.0 (PMPL-1.0-or-later preferred; MPL-2.0 required for Firefox
+  extension store)` — legitimate platform-required form per Rule 2.
+  Test `.ts` files carry `PMPL-1.0-or-later` directly.
+
+| `Containerfile` (not `Dockerfile`)
+| PRESENT (`.containerization/` present); zero `Dockerfile` at any depth
+| Container policy met
+
+| `Justfile` + `Mustfile` (no `Makefile`)
+| PRESENT (`Justfile` 10 KB, `Mustfile` 268 B, `contractile.just`);
+  zero `Makefile` at any depth
+| RSR R-020 met
+
+| Contractile trident (six-verb layout)
+| PRESENT (partial) — `.machine_readable/INTENT.contractile`,
+  `MUST.contractile`, `TRUST.contractile`, `ADJUST.contractile` +
+  `contractiles/{intend,trust,must,lust,dust,k9}/` runner set
+| Six verbs in `contractiles/`: `intend`, `trust`, `must`, `dust`,
+  `lust` (should be `bust`? — unusual spelling, check
+  Intentfile), `k9`. Missing `bust` and `adjust` as filesystem
+  directories. INTENT/MUST/TRUST contractiles are substantive (72/91/80
+  lines); ADJUST is substantive (126 lines). Runner files pattern
+  (`.a2ml` + `k9.ncl`) partially met.
+
+| Remote
+| *5 push remotes configured locally*: `origin` (github),
+  `bitbucket`, `codeberg`, `gitlab`, `sourcehut`
+| `git remote -v`. *Violates "GitHub-only, mirror-driven" rule*: local
+  `push` URLs set for bitbucket/codeberg/gitlab/sourcehut mean any
+  careless `git push --all` would push directly, bypassing the
+  downstream hub-and-spoke mirror system. Should be `fetch`-only or
+  removed entirely.
+|===
+
+*RSR compliance verdict*: **structural shell met; two content issues flag
+for attention** (multi-push-remote config; 5/6 `.machine_readable/6a2/*.a2ml`
+files are empty stubs). D-floor satisfied structurally.
+
+=== Banned-language violation (CRITICAL)
+
+FireFlag's *test suite is written in banned TypeScript*. 3,028 LOC
+across 6 `.ts` files:
+
+[cols="3,1,3"]
+|===
+| File | LOC | Type evidence
+
+| `tests/unit/flag_evaluation_test.ts` | 555 | interface declarations, type annotations
+| `tests/unit/types_test.ts`           | 544 | `interface FlagDatabase { … }`, `function validateFlagKey(key: string): boolean`
+| `tests/property/flag_properties_test.ts` | 499 | typed generics
+| `tests/e2e/extension_lifecycle_test.ts`  | 649 | typed
+| `tests/aspect/security_test.ts`          | 473 | typed
+| `tests/bench/flag_bench.ts`              | 308 | typed
+|===
+
+Verified TypeScript (not just `.ts` extension) by inspecting
+`tests/unit/types_test.ts` lines 60-120 — interfaces, type annotations
+(`key: string`, `Record<string, CategoryMeta>`), optional-field syntax
+(`lastModified?: number`), union types (`"user" | "extension" | "system"`).
+
+Per the repo-local `.claude/CLAUDE.md` (system reminder surfaced this
+audit) and estate CLAUDE.md:
+
+- BANNED: TypeScript → replacement: ReScript.
+- `deno.json` runs all tests via `deno test tests/`, so they execute as
+  TypeScript despite the policy.
+
+*Gamed workflow* — `.github/workflows/ts-blocker.yml` is the in-repo
+policy enforcement. Its check is:
+
+[source,yaml]
+----
+NEW_TS=$(git diff --name-only --diff-filter=A HEAD~1 | grep -E '\.(ts|tsx)$' | grep -v '\.gen\.' || true)
+...
+if [ -n "$NEW_TS" ] ...; then exit 1; fi
+----
+
+This only inspects the single most-recent commit's added files. The 6
+`.ts` test files were all added in one commit (2026-04-04,
+"Added comprehensive Deno test suite: 94 tests …"), then pushed — and
+the repo stayed green. The blocker is effectively theatre:
+
+. It only catches *newly added* `.ts` files, not committed ones, so
+  the existing 3,028 LOC is invisible to it.
+. Even for a single-commit PR, `HEAD~1` compares one commit back; a PR
+  with its own merge-commit parent will silently bypass.
+. There is no "existing .ts inventory" check in any other workflow.
+
+This is the *exact self-knowing policy violation* the audit spec asks
+about: a blocker workflow shipped as proof-of-compliance while banned
+code coexists with it in the same tree.
+
+=== Code and proofs
+
+[cols="2,1,3"]
+|===
+| Item | Count | Notes
+
+| Extension JS (runtime code, allowed by policy)
+| 1 387 LOC across 7 files
+| `background.js` (193), `popup.js` (264), `sidebar.js` (378),
+  `options.js` (143), `devtools.js` (19), `panel.js` (323),
+  `dom-utils.js` (67). Policy *permits* JS "only where ReScript
+  cannot" — these are mostly UI glue, but substantial sections could
+  be ReScript-authored.
+
+| ReScript source (allowed by policy)
+| 4 files, 830 LOC
+| `BrowserAPI.res` (178), `DatabaseUpdater.res` (335),
+  `DevTools.res` (171), `Types.res` (146). `.res.js` build artefacts
+  present — compile target is JS. Substantive.
+
+| Idris2 proof modules (bonus — nothing requires them at D/C)
+| 9 `.idr` files, 1 568 LOC
+| `FlagSafety` (97), `FlagTransaction` (97), `SafeChecksum` (168),
+  `SafeJson` (28), `SafeLRU` (302), `SafeQueue` (281), `SafeUI` (98),
+  `SafeUrl` (279), `SafeVersion` (218). This is a *serious* bonus
+  signal — named like genuine safety proofs, not stubs.
+  Whether they `check` clean under Idris2 is not verified in this
+  pass (build log would be needed).
+
+| OCaml build artefacts (`lib/ocaml/*.res` + `.cmj`)
+| 4 `.res` files (826 LOC) + 4 `.cmj` (0 bytes)
+| Look like copies of `extension/lib/rescript/*.res` with zero-byte
+  `.cmj` compile outputs. Possibly build cache drift.
+
+| Test LOC (TypeScript — banned language)
+| 3 028 LOC across 6 `.ts` files
+| See §Banned-language violation.
+
+| `believe_me` / `assert_total` / `Admitted` / `sorry` / `unsafeCoerce`
+  / `Obj.magic` in `extension/`
+| *0*
+| Grepped 2026-04-18 under `extension/`. Clean.
+
+| `unsafe_blocks` / Rust idioms
+| N/A
+| No Rust in this repo.
+|===
+
+=== Test matrix — declared vs actual
+
+STATE.a2ml `[test-coverage]`:
+
+[cols="2,1,1"]
+|===
+| Suite | Declared | Verified on disk (grep `Deno.test(` / `Deno.bench(`)
+
+| unit-tests       | 42 | *part of 94-total — counted*
+| property-tests   | 21 | *part of 94-total — counted*
+| e2e-tests        | 14 | *part of 94-total — counted*
+| security-tests   | 17 | *part of 94-total — counted*
+| benchmarks       | 28 | *29 `Deno.bench(` in `tests/bench/flag_bench.ts`* (STATE off by 1)
+| *total-tests*    | *94* | *94 `Deno.test(` across 5 test files (types 23 + flag_evaluation 19 + property 18 + e2e 13 + security 21)* — matches exactly
+| test-pass-rate   | 100 | Not verifiable from the filesystem; see CI note below
+|===
+
+Unit/property/e2e/aspect counts need file-level breakdown for full
+reconciliation. The total-tests claim of 94 *is* filesystem-verifiable
+(94 `Deno.test(` calls). The benchmark count is off by 1 (28 vs 29 —
+rounding error, not a problem for grade). `test-pass-rate = 100`
+claim has no green-run evidence in STATE — no last-green SHA recorded.
+
+Five of the six named `crg-requirements` suites (`unit-tests`,
+`smoke-tests`, `p2p-property`, `e2e`, `reflexive`, `contract`, `aspect`,
+`benchmarks`) are listed as "DONE". *Smoke*, *reflexive*, and
+*contract* have no corresponding test files under `tests/`
+(`tests/` contains `unit/`, `property/`, `e2e/`, `aspect/`, `bench/`,
+`fuzz/`, and `fuzz/` is *empty*). These three "DONE" marks are not
+backed by files.
+
+CI green evidence: no CI-run SHA recorded in STATE. No badge in README
+for rust-ci / test workflow. Dogfood-gate workflow (`dogfood-gate.yml`)
+exists but without a `[dogfooding-status]` section to prove it fires.
+
+=== Annotation depth
+
+v2.0 C requires **per-file and per-directory orientation**.
+
+*What is present (good):*
+
+- `EXPLAINME.adoc` (4521 bytes) is *substantive* — "show me the
+  receipts" structure, two specific README claims each mapped to a
+  source path with a "how it works" + "caveat" paragraph. Best
+  EXPLAINME of any repo audited this session.
+- `docs/SEMANTICS.adoc` — describes fire-and-forget flag semantics,
+  design principles, flag types. Substantive architecture doc (even
+  though it's *not* in `docs/architecture/`).
+- `RSR_OUTLINE.adoc` — present but is boilerplate from rsr-template,
+  not fireflag-specific.
+- `README.adoc` — substantive content (AI-install, overview,
+  installation, key features, current status).
+- Six of seven top-level directories carry orientation:
+  `contractiles/README.adoc`, `contractiles/k9/README.adoc`,
+  `.machine_readable/agent_instructions/README.adoc`,
+  `.containerization/README.adoc`, `.screenshots/README.adoc`,
+  `docs/accessibility/README.adoc`.
+
+*What is missing (bad):*
+
+- *No `extension/README.adoc`* — the actual extension code (3 455 LOC
+  of JS + ReScript + Idris2) is not oriented at the directory level.
+- *No per-subtree READMEs* under `extension/` — `background/`,
+  `popup/`, `sidebar/`, `options/`, `devtools/`, `lib/`, `data/`,
+  `icons/` all lack orientation. The sidebar's 378-LOC `sidebar.js`
+  with no README violates the "deep per-file annotation" clause.
+- *No per-module README* under `tests/` (no `tests/README.adoc`
+  explaining the unit/property/e2e/aspect layering).
+- *No `docs/architecture/`, `docs/decisions/` (ADRs),
+  `docs/governance/` (until this audit)*. No ADR-001 explaining the
+  Idris2-proof-at-runtime architecture choice.
+- 5/6 `.machine_readable/6a2/*.a2ml` files are *empty stubs* (9-24
+  lines each with only section placeholders — META has only 9 lines,
+  ECOSYSTEM 10, PLAYBOOK 23 with only section names). The
+  agent-orientation surface is not actually populated.
+
+*Verdict*: annotation is *partial-good* — the EXPLAINME and SEMANTICS
+docs are genuinely strong, better than most C-candidates. But the
+extension code itself has *zero* per-directory READMEs, and the
+6a2 A2ML files are 5-of-6 empty. C-grade "deep per-file + per-directory
+annotation" is not met.
+
+=== Dogfooding / home-stable evidence
+
+STATE.a2ml has *no `[dogfooding-status]` section*. Grep for
+`dogfooding-status|dogfood` across `.machine_readable/` returns zero
+hits. `docs/practice/` does not exist; no `DOGFOOD-LOG.adoc`.
+
+Indirect signals:
+
+- `.github/workflows/dogfood-gate.yml` — gate workflow exists (this is
+  the third repo audited this session with a dogfood-gate and no
+  dogfood log). Infrastructure, not evidence.
+- EXPLAINME.adoc claims: "FireFlag is primarily used by its maintainer
+  during Firefox privacy audits and extension testing. The same
+  local-storage-first pattern is reused in: gossamer, neurophone,
+  vscode-k9." *Verified 2026-04-18*: grep for "fireflag" in
+  gossamer/neurophone/vscode-k9 repos returns *zero* hits. The pattern
+  may be reused; the extension itself is not referenced by name in
+  those consumers. The "dogfooded across the account" claim is not
+  backed by artefact-level evidence.
+- Mozilla Add-ons submission is *pending* per ROADMAP (Signing and
+  Mozilla Submission both marked "⏳ Pending"). The extension has not
+  shipped to a store. It exists as `fireflag-0.1.0.xpi` (120 KB) in
+  `extension/web-ext-artefacts/`.
+- Maintainer personal daily-driver use — the extension likely *is*
+  installed locally per the EXPLAINME claim ("primarily used by its
+  maintainer during Firefox privacy audits"). Not captured in
+  STATE.a2ml as a concrete use entry.
+
+v2.0 C requires *continuous* home-context use with no known failures
+*logged in a concrete form* (what was dogfooded, when, where, signal).
+Evidence for this is *claimed in prose, not recorded in STATE*.
+
+=== External validation
+
+No `[external-targets]`. No `[issues-fed-back]`. No `[field-signal]`.
+
+External-adjacent signals:
+
+- Mirror remotes configured (bitbucket/codeberg/gitlab/sourcehut) —
+  mirror presence is not usage.
+- Dependabot auto-merge workflow + dependency-sync commits
+  (`6f3210b ci: restore Dependabot security path`) — automated bots,
+  not external users.
+- Mozilla Add-ons listing: *pending submission*, so no store reviews
+  or install count yet.
+- `MOZILLA-LISTING-FORM.md`, `MOZILLA-SUBMISSION-READY.md`, etc. —
+  submission prep, not submission evidence.
+
+Per v2.0, reaching B requires *6+ diverse external targets* actually
+using the software with feedback fed back. FireFlag is at *0*.
+
+== Grade x Evidence Matrix
+
+[cols="1,1,3,3"]
+|===
+| Grade | Met? | Evidence supporting | Evidence against / gaps
+
+| X
+| n/a
+| 94 tests exist → not X
+| —
+
+| F
+| n/a
+| Not superseded; no harm signal
+| —
+
+| E
+| ✓
+| 94 Deno.test calls + 29 Deno.bench across 6 test files;
+  substantial proof module library
+| —
+
+| D
+| ✓ (with reservations)
+| All structural RSR requirements met (24 workflows, 6a2 layout,
+  contractile trident, Justfile, `.well-known/`, LICENSES, SPDX
+  headers on all source, guix+nix, Containerfile). Scope documented
+  in STATE.a2ml, README.adoc, ROADMAP.adoc, EXPLAINME.adoc,
+  SEMANTICS.adoc. Total test count (94) is filesystem-verifiable.
+| Multi-push-remote config violates
+  "GitHub-only mirror-driven" rule (mechanical, easy fix).
+  Three suites (`smoke`, `reflexive`, `contract`) marked DONE in
+  `crg-requirements` with no corresponding test files.
+
+| C
+| ✗
+| Substantive EXPLAINME (best of session's audits);
+  SEMANTICS.adoc substantive; 9 Idris2 proof modules named like
+  genuine safety proofs (not `believe_me` anywhere); zero dangerous
+  patterns in extension; 94 tests verifiable.
+| *Test suite is in banned TypeScript language (3 028 LOC).*
+  *ts-blocker.yml is a gamed workflow (only catches HEAD~1
+  additions; existing .ts invisible).*
+  Per-subtree README coverage: *0/8* under `extension/`
+  (`background/`, `popup/`, `sidebar/`, etc.). No `extension/README`.
+  No `docs/architecture/`, `docs/decisions/`,
+  `docs/governance/` (until this audit). 5/6 `.machine_readable/6a2`
+  A2ML files are empty stubs. No `[dogfooding-status]` section; the
+  "dogfooded across gossamer/neurophone/vscode-k9" prose claim
+  returns zero grep hits in those repos. No CI-green-SHA recorded
+  in STATE. README says "Completion: 99%" while STATE says 75% —
+  internal inconsistency.
+
+| B
+| ✗
+| —
+| Zero external targets. Zero issues-fed-back. Zero field signal.
+  Mozilla Add-ons submission still pending.
+
+| A
+| ✗
+| —
+| No field confirmation.
+|===
+
+== Verdict
+
+*Current CRG grade: **D (Alpha)**. Demote one grade from self-declared C.*
+
+Self-declared: *C*. Audited: *D*. This is a *one-grade honesty delta*,
+smaller than neurophone's 2-grade delta but structurally similar: the
+repo has *impressive-looking* per-feature artefacts (EXPLAINME,
+SEMANTICS, Idris2 proofs, 94 tests) that defensibly clear the D bar,
+but the C clause "deep per-file + per-directory annotation + dogfooded
++ CI green" is not met, *and* a grade-C claim over a banned-language
+test suite with a gamed blocker workflow is the exact honesty pathology
+v2.0 was designed to catch.
+
+Reasoning (one sentence): fireflag meets structural RSR D-floor
+comfortably and has unusually strong architecture-level annotation
+(SEMANTICS.adoc + EXPLAINME), but its entire test suite is banned
+TypeScript protected by a `ts-blocker.yml` that only checks the most
+recent commit's additions — policy theatre — and the C-specific
+clauses (per-directory annotation under `extension/`, populated
+`[dogfooding-status]`, CI-green SHA recorded) are unmet.
+
+Positive signals that earn the D and keep it out of E:
+
+1. 94 `Deno.test(` + 29 `Deno.bench(` — filesystem-verifiable.
+   Total-tests claim (94) matches exactly; benchmarks off by 1 (28
+   declared, 29 actual).
+2. Genuinely strong EXPLAINME.adoc + SEMANTICS.adoc + 9 Idris2 proof
+   modules (1 568 LOC named `FlagSafety`, `FlagTransaction`,
+   `SafeChecksum`, `SafeLRU`, `SafeQueue`, `SafeUI`, `SafeUrl`,
+   `SafeVersion`, `SafeJson`). Zero dangerous patterns in `extension/`.
+3. RSR structural compliance is genuine: 24 workflows (including
+   npm-bun-blocker, ts-blocker, hypatia-scan, svalin-scan,
+   vordr-verify), all 6 `.machine_readable/6a2/*.a2ml` files present
+   (even if 5 are stubs), contractile trident with runners, Justfile +
+   Mustfile, LICENSES/, guix.scm + flake.nix, .well-known/.
+
+What blocks *immediate* promotion to C (do these first):
+
+. **Convert the test suite from TypeScript to ReScript.** 3 028 LOC,
+  6 files, ~1-2 weeks of focused work. `.rs.js` compile artefacts
+  already in use, so toolchain is ready.
+  OR — if TypeScript in test fixtures is to be declared a permanent
+  narrow exception — document that exception in
+  `docs/decisions/ADR-001-test-language-exception.adoc` with a
+  written policy waiver, and fix `ts-blocker.yml` to *still block new
+  .ts outside `tests/`* rather than pretend-check everything.
+. **Fix `ts-blocker.yml`.** Replace the `HEAD~1` diff with a
+  full-tree scan (`find . -name "*.ts" | grep -v ...`). This is a
+  gamed workflow today; either delete it or make it teeth-in.
+. **Add `[dogfooding-status]` to STATE.a2ml** with concrete entries:
+  on which Firefox profile was fireflag installed, when, what flags
+  did the maintainer flip, what signals (no crashes, bugs filed
+  against self, user-session log). Match the EXPLAINME prose claim
+  with artefact-level evidence.
+. **Add per-directory READMEs under `extension/`** — minimum:
+  `extension/README.adoc`, `extension/background/README.adoc`,
+  `extension/sidebar/README.adoc`, `extension/popup/README.adoc`,
+  `extension/options/README.adoc`, `extension/devtools/README.adoc`,
+  `extension/lib/README.adoc`, `extension/data/README.adoc`.
+. **Reconcile the 75 vs 99 completion-percentage.** README says 99,
+  STATE says 75 — pick one, ideally 75 given that Mozilla submission
+  is pending and three `crg-requirements` suites (smoke, reflexive,
+  contract) are marked DONE without files.
+. **Populate the 5 stub A2ML files** in `.machine_readable/6a2/`:
+  META.a2ml (currently 9 lines) should list architecture decisions;
+  ECOSYSTEM.a2ml (10 lines) should list dependency projects;
+  PLAYBOOK.a2ml (23 lines) should list run/debug/deploy commands;
+  AGENTIC (24 lines) and NEUROSYM (14 lines) should describe agent
+  and neurosymbolic integration points. Current content is section
+  headers only.
+. **Record a green CI run** — add `last-green-ci-sha` and
+  `last-green-ci-date` to STATE.a2ml `[metadata]` or
+  `[test-coverage]`.
+. **Clean push-remote config** — make bitbucket/codeberg/gitlab/
+  sourcehut fetch-only or remove them entirely; leave mirroring to the
+  downstream hub-and-spoke.
+
+What blocks promotion to B (after C):
+
+. Zero external targets. Need 6+ diverse — different Firefox versions,
+  different Gecko forks (LibreWolf, Waterfox, Floorp), different OS
+  profiles, different privacy-sensitivity user profiles.
+. Mozilla Add-ons submission is *pending*; no store-review feedback
+  yet. Post-submission, store reviews + install count + bug reports
+  become field signal.
+. No external-contributor flow. Dependabot bumps don't count under
+  v2.0.
+
+== Notes on Non-Negotiables Respected by this Audit
+
+- The SPDX `MPL-2.0 (PMPL-1.0-or-later preferred; MPL-2.0 required for
+  Firefox extension store)` header form used on the extension
+  runtime code is the *legitimate platform-required fallback* under
+  Rule 2 of the estate licence policy — Firefox Add-ons requires an
+  OSI-approved licence. This is not counted as a licence-policy
+  violation.
+- The Idris2 proof modules are *not* re-audited for proof-closure
+  here. If the project wants to claim them as proven-code evidence at
+  grade C/B, a separate proof-closure audit is needed (Idris2
+  `check`, no `believe_me`/`assert_total` in `.idr` files, CI running
+  on proof changes).
+- README's "Completion: 99%" vs STATE's 75% is flagged but the audit
+  does not itself re-score completion-percentage — it is not a v2.0
+  grade criterion.
+- The standing rule "GitHub is source of truth; other forges are
+  mirror-driven" is respected in this audit — the five-push-remote
+  config is flagged as a drift to fix, not a violation that changes
+  the grade.
+
+== STATE.a2ml update recommendation
+
+Recommended (do *NOT* execute as part of this audit) — edit
+`.machine_readable/6a2/STATE.a2ml`:
+
+[source,toml]
+----
+[metadata]
+project = "fireflag"
+version = "0.1.0"
+last-updated = "2026-04-18"
+status = "active"
+crg-grade = "D"                  # was "C"
+crg-grade-previous = "C"         # audit trail
+crg-audit = "docs/governance/CRG-AUDIT-2026-04-18.adoc"
+crg-next-target = "C"            # honest proximate bar
+
+[project-context]
+name = "fireflag"
+completion-percentage = 75       # unchanged (README still says 99 —
+                                 # reconcile README down)
+phase = "Mozilla submission pending; test suite in banned TypeScript;
+         per-directory annotation incomplete"
+
+[test-coverage]
+unit-tests = 42                  # part-of-94
+property-tests = 21              # part-of-94
+e2e-tests = 14                   # part-of-94
+security-tests = 17              # part-of-94 (mapped to aspect/)
+benchmarks = 29                  # was 28 — verified on disk
+total-tests = 94                 # verified via `Deno.test(` grep
+test-language = "TypeScript (BANNED — convert to ReScript for grade C)"
+
+[crg-requirements]
+unit-tests = "DONE"
+property = "DONE"
+e2e = "DONE"
+aspect = "DONE"
+benchmarks = "DONE"
+# smoke-tests = "DONE"           -> no smoke/ test files found; drop
+# reflexive = "DONE"             -> no reflexive test files; drop
+# contract = "DONE"              -> no contract test files; drop
+
+[dogfooding-status]
+# TODO — populate with concrete entries:
+# maintainer-firefox-profile = "<profile-id>, installed <date>, flipped flags: ..."
+# gossamer-integration = "NOT VERIFIED — EXPLAINME claims pattern reuse,
+#                         no fireflag refs in gossamer repo"
+
+[blockers]
+banned-test-language = "3 028 LOC of TypeScript in tests/ — convert
+                         to ReScript or document ADR exception."
+gamed-ts-blocker = "ts-blocker.yml only inspects HEAD~1 additions;
+                    existing .ts code invisible. Fix or delete."
+completion-mismatch = "README says 99%, STATE says 75% — reconcile."
+mirror-remote-drift = "5 push remotes configured locally; should be
+                       GitHub-only per mirror policy."
+----
+
+Demote target: *D*. Route-to-C is the banned-language conversion +
+per-directory annotation + dogfood-log sprint above. Once C is earned,
+the B climb is the Mozilla-submission + external-targets block.
+
+== Related Files
+
+- `.machine_readable/6a2/STATE.a2ml` — authoritative self-declared
+  state; recommend demote C→D citing this audit.
+- `README.adoc` — "Completion: 99%" mismatched with STATE's 75%.
+- `EXPLAINME.adoc` — strong architecture annotation, but unverified
+  dogfood claims about gossamer/neurophone/vscode-k9.
+- `.github/workflows/ts-blocker.yml` — gamed workflow (HEAD~1 only).
+- `tests/unit/types_test.ts`, `tests/unit/flag_evaluation_test.ts`,
+  `tests/property/flag_properties_test.ts`,
+  `tests/e2e/extension_lifecycle_test.ts`,
+  `tests/aspect/security_test.ts`, `tests/bench/flag_bench.ts` —
+  3 028 LOC of banned TypeScript.
+- `extension/lib/idris/*.idr` — 9 proof modules (1 568 LOC), bonus
+  signal for grade-B candidacy once proofs are verified clean.
+- `docs/SEMANTICS.adoc` — substantive architecture doc (should move to
+  `docs/architecture/SEMANTICS.adoc` during C lift).
+- `docs/governance/CRG-LIFT-PLAN-2026-04-18.adoc` — *to be written* if
+  a C-lift sprint is scheduled.
+- `~/Desktop/CRG-STATE-INVENTORY.md` — Phase 1 estate inventory entry
+  for fireflag.
+
+_End of audit._

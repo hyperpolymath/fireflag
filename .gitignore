@@ -85,6 +85,18 @@ ai-cli-crash-capture/
 *.cmt
 *.cmti
 *.cmi
+*.cmj
+*.ast
+# The rescript build mirrors each compiled source into `lib/ocaml/<Module>.res`
+# as a stable backup copy.  The canonical sources live in `extension/lib/rescript/`
+# and `tests/` (see rescript.json).  Ignore the mirror to keep git history clean.
+/lib/ocaml/*.res
+# Preserve the handful of files that ARE intentionally tracked there today
+# (historic BucklScript layout).  `git add -f` can be used for new ones.
+!/lib/ocaml/BrowserAPI.res
+!/lib/ocaml/DatabaseUpdater.res
+!/lib/ocaml/DevTools.res
+!/lib/ocaml/Types.res
 target/
 node_modules/
 _build/

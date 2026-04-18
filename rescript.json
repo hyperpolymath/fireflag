@@ -4,6 +4,11 @@
     {
       "dir": "extension/lib/rescript",
       "subdirs": true
+    },
+    {
+      "dir": "tests",
+      "subdirs": true,
+      "type": "dev"
     }
   ],
   "package-specs": [

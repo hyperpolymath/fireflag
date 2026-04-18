@@ -239,7 +239,7 @@ See link:PRIVACY.md[PRIVACY.md] for full privacy policy.
 
 [source,bash]
 ----
-# Install justfile runner
+# Install Justfile runner
 # Fedora: dnf install just
 # Arch: pacman -S just
 # macOS: brew install just

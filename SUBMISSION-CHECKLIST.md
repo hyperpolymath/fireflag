@@ -85,7 +85,7 @@
     --api-secret=YOUR_API_SECRET \
     --channel=listed
 
-  # Or using justfile
+  # Or using Justfile
   just sign-ext YOUR_API_KEY YOUR_API_SECRET
   ```
 - [ ] Verify signed .xpi created

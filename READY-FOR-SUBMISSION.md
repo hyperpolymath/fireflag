@@ -126,7 +126,7 @@ firefox extension/web-ext-artifacts/fireflag-0.1.0.xpi
   --api-secret YOUR_SECRET \
   --channel listed
 
-# Option 2: Using justfile
+# Option 2: Using Justfile
 just sign-ext YOUR_KEY YOUR_SECRET
 
 # Option 3: Using environment variables

@@ -7,6 +7,32 @@ Jonathan D.A. Jewell
 :toc:
 :sectnums:
 
+[IMPORTANT]
+====
+*Addendum 2026-04-18 (post-audit, same day):* the banned-language
+finding in §3.2 ("Banned-language violation (CRITICAL)") has been
+*resolved*.  All six TypeScript test files (3 028 LOC) were transpiled
+to ReScript, replaced with:
+
+* `tests/unit/TypesTest.res` (23 tests)
+* `tests/unit/FlagEvaluationTest.res` (19 tests)
+* `tests/property/FlagPropertiesTest.res` (18 tests)
+* `tests/e2e/ExtensionLifecycleTest.res` (13 tests)
+* `tests/aspect/SecurityTest.res` (21 tests)
+* `tests/bench/FlagBench.res` (26 benchmarks)
+* `tests/Bindings.res` (Deno.test + std/assert bindings)
+
+All 94 tests still pass under `deno task test`; the extension XPI is
+unaffected (TS was only ever in `tests/`, never shipped).  The §3.2
+finding is preserved below as a point-in-time audit record but should
+not block any downstream C-lift work that cites this document.
+
+The remaining §3 findings — empty `.machine_readable/6a2/*.a2ml`
+stubs, multi-push-remote config, gamed `ts-blocker.yml` (HEAD~1 only),
+per-directory annotation gap, absent external-targets block — are all
+still open.  See §5 for the current route to C / B.
+====
+
 == Scope and Standard
 
 Evaluates the `fireflag` repository (verification-ecosystem submodule) against

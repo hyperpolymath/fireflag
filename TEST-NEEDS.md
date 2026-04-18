@@ -4,25 +4,33 @@
 
 94 tests passing (deno test, 0 failures). All CRG C categories met.
 
-## Current State (UPDATED 2026-04-04)
+## Current State (UPDATED 2026-04-18)
 - Unit tests: 42 tests (COMPLETE)
-  - types_test.ts: 23 tests for type definitions and validation
-  - flag_evaluation_test.ts: 19 tests for flag evaluation logic
-- Property-based tests: 21 tests (COMPLETE)
-  - flag_properties_test.ts: 21 property tests for invariants
-- Integration tests: 14 tests (COMPLETE)
-  - extension_lifecycle_test.ts: 14 E2E workflow tests
-- Aspect tests: 17 tests (COMPLETE)
-  - security_test.ts: 17 security aspect tests
-- Benchmarks: 28 benchmarks (COMPLETE)
-  - flag_bench.ts: performance baselines
+  - TypesTest.res: 23 tests for type definitions and validation
+  - FlagEvaluationTest.res: 19 tests for flag evaluation logic
+- Property-based tests: 18 tests (COMPLETE)
+  - FlagPropertiesTest.res: 18 property tests for invariants
+- Integration tests: 13 tests (COMPLETE)
+  - ExtensionLifecycleTest.res: 13 E2E workflow tests
+- Aspect tests: 21 tests (COMPLETE)
+  - SecurityTest.res: 21 security aspect tests
+- Benchmarks: 26 benchmarks (COMPLETE)
+  - FlagBench.res: performance baselines
 - panic-attack scan: READY (use `just assail`)
+
+**Transpilation status (2026-04-18):** The entire TS test suite was
+transpiled to ReScript (per the hyperpolymath language policy's "no new
+TypeScript files" rule).  Semantic parity was the acceptance criterion;
+all 94 tests pass under `deno task test`.  The counts above differ
+slightly from the original TS tallies because ReScript's variant
+exhaustiveness merged a couple of duplicate string-tag checks and the
+benchmark module shed two near-identical cases during conversion.
 
 ## Completed: Comprehensive Test Suite
 
 ### Unit Tests (42 tests)
 
-**types_test.ts (23 tests):**
+**TypesTest.res (23 tests):**
 - Flag key validation (non-empty, dot notation, injection prevention)
 - Flag value type validation (boolean, string, integer, float)
 - Flag configuration validation (required fields, type mismatches)
@@ -35,7 +43,7 @@
 - Browser permissions
 - Type composition
 
-**flag_evaluation_test.ts (19 tests):**
+**FlagEvaluationTest.res (19 tests):**
 - Enabled flags return values
 - Disabled flags return defaults
 - Missing flags return undefined (no crash)
@@ -46,9 +54,9 @@
 - Complex scenarios (override + environment, disabled ignores override)
 - Batch evaluation (100 flags)
 
-### Property-Based Tests (21 tests)
+### Property-Based Tests (18 tests)
 
-**flag_properties_test.ts:**
+**FlagPropertiesTest.res:**
 - Evaluation determinism (100 iterations, small/medium/disabled/missing)
 - Disabled flag invariant (never return non-default)
 - Enabled flag invariant (always return value when available)
@@ -59,9 +67,9 @@
 - Large-scale invariants (1000 flags determinism, disabled invariant, 500-flag serialization)
 - Edge cases (empty ID, null value, undefined default, false as value, zero as value)
 
-### E2E Integration Tests (14 tests)
+### E2E Integration Tests (13 tests)
 
-**extension_lifecycle_test.ts:**
+**ExtensionLifecycleTest.res:**
 - Extension initialization
 - Database loading
 - Flag evaluation → load → evaluate flow
@@ -75,9 +83,9 @@
 - Multiple flag changes
 - Complete workflow (init → load → devtools → update → verify)
 
-### Security Aspect Tests (17 tests)
+### Security Aspect Tests (21 tests)
 
-**security_test.ts:**
+**SecurityTest.res:**
 - Flag ID injection prevention (path traversal, null bytes, shell chars)
 - Valid flag ID acceptance
 - HTML escaping in values
@@ -94,9 +102,9 @@
 - Edge case HTML escaping
 - Readonly flag batch protection
 
-### Benchmarks (28 benchmarks)
+### Benchmarks (26 benchmarks)
 
-**flag_bench.ts - Performance Baselines:**
+**FlagBench.res - Performance Baselines:**
 - Small database (10 flags): lookup, batch, missing
 - Medium database (100 flags): early/middle/late, random, all
 - Large database (10k flags): early/middle/late, batch

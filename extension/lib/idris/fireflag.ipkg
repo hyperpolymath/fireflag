@@ -1,12 +1,12 @@
 -- SPDX-License-Identifier: MPL-2.0
--- (PMPL-1.0-or-later preferred; MPL-2.0 required for Firefox extension store)
+-- (MPL-2.0 preferred; MPL-2.0 required for Firefox extension store)
 -- Idris2 package file for FireFlag FFI modules
 
 package fireflag
 
 version = 0.1.0
 authors = "Jonathan D.A. Jewell"
-license = "PMPL-1.0-or-later"
+license = "MPL-2.0"
 brief = "Firefox flag management FFI with safety proofs"
 readme = "README.md"
 

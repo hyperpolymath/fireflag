@@ -1,5 +1,5 @@
 -- SPDX-License-Identifier: MPL-2.0
--- (PMPL-1.0-or-later preferred; MPL-2.0 required for Firefox extension store)
+-- (MPL-2.0 preferred; MPL-2.0 required for Firefox extension store)
 ||| SafeVersion - Safe semantic version parsing and comparison
 |||
 ||| This module provides safe operations for semantic versioning

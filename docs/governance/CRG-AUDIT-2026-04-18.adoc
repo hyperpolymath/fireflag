@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 // Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 = FireFlag — CRG Audit (2026-04-18)
@@ -121,10 +121,10 @@ Publication requires B+. Long alpha is discipline, not shame.
   C-grade annotation bar.
 
 | `LICENSE` + `LICENSES/` directory
-| PRESENT (LICENSE 18 KB, `LICENSES/PMPL-1.0-or-later.txt`,
+| PRESENT (LICENSE 18 KB, `LICENSES/MPL-2.0.txt`,
   `LICENSES/MPL-2.0.txt`)
 | Good hygiene. LICENSE is MPL-2.0 text (platform-required for Firefox
-  extension store per Rule 2 fallback). PMPL-1.0-or-later preferred per
+  extension store per Rule 2 fallback). MPL-2.0 preferred per
   STATE `[metadata] license` and META.a2ml.
 
 | `guix.scm` + `flake.nix`
@@ -139,9 +139,9 @@ Publication requires B+. Long alpha is discipline, not shame.
 | PRESENT on all sampled source — all `.js`, `.res`, `.idr`, `.ts`
   test files carry headers
 | Extension JS + ReScript + Idris2 carry
-  `MPL-2.0 (PMPL-1.0-or-later preferred; MPL-2.0 required for Firefox
+  `MPL-2.0 (MPL-2.0 preferred; MPL-2.0 required for Firefox
   extension store)` — legitimate platform-required form per Rule 2.
-  Test `.ts` files carry `PMPL-1.0-or-later` directly.
+  Test `.ts` files carry `MPL-2.0` directly.
 
 | `Containerfile` (not `Dockerfile`)
 | PRESENT (`.containerization/` present); zero `Dockerfile` at any depth
@@ -567,7 +567,7 @@ What blocks promotion to B (after C):
 
 == Notes on Non-Negotiables Respected by this Audit
 
-- The SPDX `MPL-2.0 (PMPL-1.0-or-later preferred; MPL-2.0 required for
+- The SPDX `MPL-2.0 (MPL-2.0 preferred; MPL-2.0 required for
   Firefox extension store)` header form used on the extension
   runtime code is the *legitimate platform-required fallback* under
   Rule 2 of the estate licence policy — Firefox Add-ons requires an

@@ -116,7 +116,7 @@ fireflag/
 │   ├── data/                    # Flag database
 │   └── icons/                   # Extension icons
 ├── README.md                    # Project documentation
-├── LICENSE                      # PMPL-1.0-or-later
+├── LICENSE                      # MPL-2.0
 └── BUILD_INSTRUCTIONS.md        # This file
 ```
 
@@ -162,7 +162,7 @@ diff submitted.txt built.txt
 
 ## License
 
-- **Extension Code:** PMPL-1.0-or-later (Palimpsest Meta-Project License)
+- **Extension Code:** MPL-2.0 (Palimpsest Meta-Project License)
 - **License File:** `LICENSE` in repository root
 - **License URL:** https://github.com/hyperpolymath/palimpsest-license
 
@@ -195,7 +195,7 @@ These files are **NOT executed** - they're included for transparency and verific
 
 All source code is available at:
 - **GitHub:** https://github.com/hyperpolymath/fireflag
-- **License:** Open source (PMPL-1.0-or-later)
+- **License:** Open source (MPL-2.0)
 
 ---
 

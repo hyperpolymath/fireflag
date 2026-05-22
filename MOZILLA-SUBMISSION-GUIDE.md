@@ -45,7 +45,7 @@ If you prefer the web interface:
    - 07-permission-dialog.png
 
 5. **Additional Information**:
-   - License: Palimpsest License (PMPL-1.0-or-later)
+   - License: Palimpsest License (MPL-2.0)
    - Homepage: https://github.com/hyperpolymath/fireflag
    - Support: https://github.com/hyperpolymath/fireflag/issues
    - Privacy Policy: Link to PRIVACY.md in repo

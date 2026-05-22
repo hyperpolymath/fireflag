@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # FireFlag Extension Build Container
 # Uses chainguard minimal images for security
 
@@ -111,7 +111,7 @@ COPY --from=builder /build/LICENSE /fireflag/
 LABEL org.opencontainers.image.title="FireFlag"
 LABEL org.opencontainers.image.description="Safe Firefox/Gecko flag management extension"
 LABEL org.opencontainers.image.authors="Jonathan D.A. Jewell <jonathan.jewell@open.ac.uk>"
-LABEL org.opencontainers.image.licenses="PMPL-1.0-or-later"
+LABEL org.opencontainers.image.licenses="MPL-2.0"
 LABEL org.opencontainers.image.source="https://github.com/hyperpolymath/fireflag"
 LABEL org.opencontainers.image.vendor="hyperpolymath"
 

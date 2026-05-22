@@ -64,7 +64,7 @@ Feature flags can introduce bugs and technical debt. FireFlag helps developers:
 
 - GitHub: https://github.com/hyperpolymath/fireflag
 - Issues: https://github.com/hyperpolymath/fireflag/issues
-- License: PMPL-1.0-or-later
+- License: MPL-2.0
 ```
 
 ## Categories
@@ -123,7 +123,7 @@ Custom License
 
 **License Name:**
 ```
-Palimpsest Meta-Project License 1.0 or later (PMPL-1.0-or-later)
+Palimpsest Meta-Project License 1.0 or later (MPL-2.0)
 ```
 
 **License URL:**

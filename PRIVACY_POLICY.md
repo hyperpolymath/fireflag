@@ -149,7 +149,7 @@ Since we collect zero data, compliance is straightforward: no data collection me
 
 FireFlag is open source software. You can audit our privacy claims by reviewing the source code:
 - **Repository:** https://github.com/hyperpolymath/fireflag
-- **License:** PMPL-1.0-or-later (Palimpsest Meta-Project License)
+- **License:** MPL-2.0 (Palimpsest Meta-Project License)
 
 ## Contact
 

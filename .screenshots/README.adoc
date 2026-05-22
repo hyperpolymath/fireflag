@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 = FireFlag Screenshots Guide
 :toc:
 :toclevels: 3
@@ -263,7 +263,7 @@ For reproducible screenshots in CI:
 
 Screenshots are documentation and fall under the same license as FireFlag:
 
-* PMPL-1.0-or-later (primary)
+* MPL-2.0 (primary)
 * MPL-2.0 (fallback for Mozilla Add-ons)
 
 == Contact

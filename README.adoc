@@ -380,7 +380,7 @@ See link:ROADMAP.adoc[ROADMAP.adoc] for detailed roadmap.
 
 FireFlag is open source software licensed under MPL-2.0. This was chosen for compatibility with Mozilla Add-ons ecosystem requirements.
 
-**Preferred License:** Palimpsest License (PMPL-1.0-or-later) +
+**Preferred License:** Palimpsest License (MPL-2.0) +
 **Fallback License:** MPL-2.0 (for Chrome/Firefox extension stores)
 
 See link:LICENSE[LICENSE] for full text.

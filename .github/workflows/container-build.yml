@@ -132,7 +132,7 @@ jobs:
           jq '.manifest_version == 3' /tmp/extension/manifest.json
 
       - name: Run TruffleHog
-        uses: trufflesecurity/trufflehog@8a8ef8526528d8a4ff3e2c90be08e25ef8efbd9b # v3
+        uses: trufflesecurity/trufflehog@37b77001d0174ebec2fcca2bd83ff83a6d45a3ab # v3
         with:
           path: artifacts/
           base: ''

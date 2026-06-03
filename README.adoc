@@ -1,6 +1,10 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 = FireFlag
+image:https://img.shields.io/badge/OpenSSF-Best_Practices-green?logo=openssourcesecurity[OpenSSF Best Practices,link="https://www.bestpractices.dev/en/projects/new?repo_url=https://github.com/hyperpolymath/fireflag"]
 
-image:https://img.shields.io/badge/License-MPL--2.0-blue.svg[License: MPL-2.0,link="https://mozilla.org/MPL/2.0/"]
+
+image:https://img.shields.io/badge/License-MPL_2.0--2.0-blue.svg[License: MPL-2.0,link="https://mozilla.org/MPL/2.0/"]
 image:https://img.shields.io/badge/RSR-Certified-gold[RSR Certified,link=https://github.com/hyperpolymath/rhodium-standard-repositories]
 image:https://img.shields.io/badge/Status-Ready%20for%20Submission-brightgreen[Status]
 image:https://img.shields.io/badge/Version-0.1.0-blue[Version]
@@ -380,7 +384,7 @@ See link:ROADMAP.adoc[ROADMAP.adoc] for detailed roadmap.
 
 FireFlag is open source software licensed under MPL-2.0. This was chosen for compatibility with Mozilla Add-ons ecosystem requirements.
 
-**Preferred License:** Palimpsest License (MPL-2.0) +
+**Preferred License:** MPL-2.0 (MPL-2.0) +
 **Fallback License:** MPL-2.0 (for Chrome/Firefox extension stores)
 
 See link:LICENSE[LICENSE] for full text.

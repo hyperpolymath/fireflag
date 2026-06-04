@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
 # Mozilla Add-ons Submission Guide
 
 ## Quick Submission (Command Line)
@@ -45,7 +49,7 @@ If you prefer the web interface:
    - 07-permission-dialog.png
 
 5. **Additional Information**:
-   - License: Palimpsest License (MPL-2.0)
+   - License: MPL-2.0 (MPL-2.0)
    - Homepage: https://github.com/hyperpolymath/fireflag
    - Support: https://github.com/hyperpolymath/fireflag/issues
    - Privacy Policy: Link to PRIVACY.md in repo

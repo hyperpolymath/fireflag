@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
 # Mozilla Add-ons Listing Form - FireFlag
 
 Use these values when filling out the Mozilla Add-ons submission form:

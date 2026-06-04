@@ -13,10 +13,10 @@
     },
     {
       "category": "UncheckedError",
-      "location": "contractiles/k9/template-hunt.k9.ncl",
-      "file": "contractiles/k9/template-hunt.k9.ncl",
+      "location": "contractiles/self-validating/template-hunt.k9.ncl",
+      "file": "contractiles/self-validating/template-hunt.k9.ncl",
       "severity": "Low",
-      "description": "14 TODO/FIXME/HACK markers in contractiles/k9/template-hunt.k9.ncl",
+      "description": "14 TODO/FIXME/HACK markers in contractiles/self-validating/template-hunt.k9.ncl",
       "recommended_attack": [
         "cpu"
       ]
@@ -281,7 +281,7 @@
         "sink_axis": "cpu",
         "severity_value": 1.0,
         "files": [
-          "contractiles/k9/template-hunt.k9.ncl"
+          "contractiles/self-validating/template-hunt.k9.ncl"
         ],
         "frameworks": [],
         "relation": "UncheckedError->Cpu"

@@ -13,6 +13,7 @@ permissions:
 jobs:
   vordr-verification:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code

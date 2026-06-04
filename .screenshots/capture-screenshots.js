@@ -1,5 +1,6 @@
-#!/usr/bin/env -S deno run --allow-read --allow-write --allow-net --allow-run --allow-env
 // SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+#!/usr/bin/env -S deno run --allow-read --allow-write --allow-net --allow-run --allow-env
 // Automated screenshot capture for FireFlag extension
 
 import puppeteer from "https://deno.land/x/puppeteer@16.2.0/mod.ts";

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 = FireFlag — CRG Audit (2026-04-18)
 Jonathan D.A. Jewell
 2026-04-18
@@ -332,7 +331,7 @@ v2.0 C requires **per-file and per-directory orientation**.
 - `README.adoc` — substantive content (AI-install, overview,
   installation, key features, current status).
 - Six of seven top-level directories carry orientation:
-  `contractiles/README.adoc`, `contractiles/k9/README.adoc`,
+  `contractiles/README.adoc`, `contractiles/self-validating/README.adoc`,
   `.machine_readable/agent_instructions/README.adoc`,
   `.containerization/README.adoc`, `.screenshots/README.adoc`,
   `docs/accessibility/README.adoc`.

@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
 # FireFlag v0.1.0 - Mozilla Add-ons Submission Checklist
 
 ## Pre-Submission Requirements

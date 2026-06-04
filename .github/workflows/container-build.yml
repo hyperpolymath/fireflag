@@ -14,6 +14,7 @@ permissions:
 jobs:
   container-build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
@@ -61,6 +62,7 @@ jobs:
 
   reproducibility-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: container-build
     if: github.event_name == 'pull_request'
 
@@ -105,6 +107,7 @@ jobs:
 
   security-scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: container-build
 
     steps:

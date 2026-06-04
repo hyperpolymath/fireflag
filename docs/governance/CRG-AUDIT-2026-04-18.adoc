@@ -332,7 +332,7 @@ v2.0 C requires **per-file and per-directory orientation**.
   installation, key features, current status).
 - Six of seven top-level directories carry orientation:
   `contractiles/README.adoc`, `contractiles/self-validating/README.adoc`,
-  `.machine_readable/agent_instructions/README.adoc`,
+  `.machine_readable/bot_directives/README.adoc`,
   `.containerization/README.adoc`, `.screenshots/README.adoc`,
   `docs/accessibility/README.adoc`.
 

@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
 name: Update Flag Database
-
 # Runs weekly to detect Mozilla flag changes
 on:
   schedule:
@@ -9,10 +8,8 @@ on:
   pull_request:
     paths:
       - 'extension/data/flags-database.json'
-
 permissions:
   contents: read
-
 jobs:
   detect-mozilla-changes:
     runs-on: ubuntu-latest
@@ -20,16 +17,13 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
-
       - name: Setup Deno
         uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2
         with:
           deno-version: v2.x
-
       - name: Fetch Firefox source preferences
         run: |
           # Download Firefox source to check for new/changed prefs
@@ -38,7 +32,6 @@ jobs:
 
           wget https://hg.mozilla.org/mozilla-central/raw-file/tip/modules/libpref/init/StaticPrefList.yaml \
             -O /tmp/firefox-static-prefs.yaml
-
       - name: Compare with current database
         id: compare
         run: |
@@ -66,7 +59,6 @@ jobs:
           else
             echo "changes_detected=false" >> $GITHUB_OUTPUT
           fi
-
       - name: Create issue for new flags
         if: steps.compare.outputs.changes_detected == 'true'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v7
@@ -111,14 +103,12 @@ jobs:
               body: body,
               labels: ['flag-database', 'automated', 'needs-review']
             });
-
       - name: Validate current database schema
         run: |
           # Validate JSON schema
           npx ajv-cli validate \
             -s extension/data/flags-schema.json \
             -d extension/data/flags-database.json
-
       - name: Check for community contributions
         run: |
           # Check if this is a PR adding/modifying flags
@@ -134,18 +124,15 @@ jobs:
             # - Documentation links present
             # - No duplicate keys
           fi
-
   version-compatibility-check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       matrix:
         firefox-version: ['109', '115', '120', '125', 'nightly']
-
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
-
       - name: Test Firefox ${{ matrix.firefox-version }}
         run: |
           # Check which flags are valid for this Firefox version
@@ -160,7 +147,6 @@ jobs:
 
           COUNT=$(wc -l < flags-for-${{ matrix.firefox-version }}.txt)
           echo "Firefox ${{ matrix.firefox-version }}: $COUNT compatible flags"
-
       - name: Upload compatibility report
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
         with:

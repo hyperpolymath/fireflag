@@ -1,33 +1,26 @@
 # SPDX-License-Identifier: MPL-2.0
 name: Vordr Runtime Verification
-
 on:
   push:
     branches: [main, develop]
   pull_request:
     branches: [main]
-
 permissions:
   contents: read
-
 jobs:
   vordr-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
-
       - name: Setup Firefox
         run: |
           sudo apt-get update
           sudo apt-get install -y firefox
-
       - name: Install web-ext
         run: |
           npm install -g web-ext
-
       - name: Verify extension structure
         run: |
           echo "::group::Extension Structure Verification"
@@ -49,7 +42,6 @@ jobs:
           done
 
           echo "::endgroup::"
-
       - name: Validate manifest.json
         run: |
           echo "::group::Manifest Validation"
@@ -74,7 +66,6 @@ jobs:
           fi
 
           echo "::endgroup::"
-
       - name: Test extension loading
         run: |
           echo "::group::Extension Load Test"
@@ -87,7 +78,6 @@ jobs:
           }
 
           echo "::endgroup::"
-
       - name: Verify browser API usage
         run: |
           echo "::group::Browser API Verification"
@@ -115,7 +105,6 @@ jobs:
           done
 
           echo "::endgroup::"
-
       - name: Check for dangerous patterns
         run: |
           echo "::group::Dangerous Pattern Detection"

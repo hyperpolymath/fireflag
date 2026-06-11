@@ -1,16 +1,13 @@
 # SPDX-License-Identifier: MPL-2.0
 name: Container Build
-
 on:
   push:
     branches: [main, develop]
   pull_request:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   container-build:
     runs-on: ubuntu-latest
@@ -18,63 +15,52 @@ jobs:
     permissions:
       contents: read
       packages: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
-
       - name: Set up Podman
         run: |
           sudo apt-get update
           sudo apt-get install -y podman
-
       - name: Build container
         run: |
           podman build -f .containerization/Containerfile -t fireflag:${{ github.sha }} .
-
       - name: Extract artifacts
         run: |
           CONTAINER_ID=$(podman create fireflag:${{ github.sha }})
           mkdir -p build-output
           podman cp $CONTAINER_ID:/build/extension/web-ext-artifacts/ build-output/ || true
           podman rm $CONTAINER_ID
-
       - name: Verify checksums
         run: |
           if [ -f build-output/web-ext-artifacts/SHA256SUMS ]; then
             cd build-output/web-ext-artifacts
             sha256sum -c SHA256SUMS
           fi
-
       - name: Upload extension artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
         with:
           name: fireflag-extension-${{ github.sha }}
           path: build-output/web-ext-artifacts/*.xpi
           retention-days: 30
-
       - name: Upload checksums
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
         with:
           name: fireflag-checksums-${{ github.sha }}
           path: build-output/web-ext-artifacts/SHA256SUMS*
           retention-days: 30
-
   reproducibility-check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: container-build
     if: github.event_name == 'pull_request'
-
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
-
       - name: Set up Podman
         run: |
           sudo apt-get update
           sudo apt-get install -y podman
-
       - name: Build container (attempt 1)
         run: |
           podman build -f .containerization/Containerfile -t fireflag:build1 .
@@ -82,7 +68,6 @@ jobs:
           mkdir -p build1
           podman cp $CONTAINER_ID:/build/extension/web-ext-artifacts/ build1/ || true
           podman rm $CONTAINER_ID
-
       - name: Build container (attempt 2)
         run: |
           # Clean and rebuild to test reproducibility
@@ -92,7 +77,6 @@ jobs:
           mkdir -p build2
           podman cp $CONTAINER_ID:/build/extension/web-ext-artifacts/ build2/ || true
           podman rm $CONTAINER_ID
-
       - name: Compare builds
         run: |
           echo "Comparing build artifacts for reproducibility..."
@@ -104,22 +88,18 @@ jobs:
             echo "⚠ Builds differ (this is expected currently)"
             echo "See .containerization/README.adoc for details"
           fi
-
   security-scan:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: container-build
-
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
-
       - name: Download artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v4
         with:
           name: fireflag-extension-${{ github.sha }}
           path: artifacts/
-
       - name: Scan extension archive
         run: |
           # Unzip and scan contents
@@ -133,7 +113,6 @@ jobs:
           echo "Verifying manifest..."
           jq empty /tmp/extension/manifest.json
           jq '.manifest_version == 3' /tmp/extension/manifest.json
-
       - name: Run TruffleHog
         uses: trufflesecurity/trufflehog@37b77001d0174ebec2fcca2bd83ff83a6d45a3ab # v3
         with:

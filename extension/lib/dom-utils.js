@@ -18,17 +18,10 @@
  * @param {string} htmlString - HTML string to set
  */
 function safeSetHTML(element, htmlString) {
-  // Clear existing content
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
-
-  // Create a template element to parse HTML safely
-  const template = document.createElement('template');
-  template.innerHTML = htmlString;
-
-  // Append the parsed content
-  element.appendChild(template.content.cloneNode(true));
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  // Use modern replaceChildren to clear and append in one go
+  element.replaceChildren(...doc.body.childNodes);
 }
 
 /**
@@ -37,9 +30,13 @@ function safeSetHTML(element, htmlString) {
  * @returns {string} - Escaped text
  */
 function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  if (!text) return text;
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 /**

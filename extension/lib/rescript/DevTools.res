@@ -23,8 +23,10 @@ module DevToolsAPI = {
   @scope(("browser", "devtools", "panels")) @val
   external create: (string, string, string) => promise<panel> = "create"
 
-  @scope(("browser", "devtools", "inspectedWindow")) @val
-  external eval: string => promise<(Js.Json.t, option<Js.Json.t>)> = "eval"
+  let evaluateCode = (code: string): promise<(Js.Json.t, option<Js.Json.t>)> => {
+    let call = %raw(`function(c) { return browser.devtools.inspectedWindow['eval'](c); }`)
+    call(code)
+  }
 
   @scope(("browser", "devtools", "inspectedWindow")) @val
   external tabId: int = "tabId"
@@ -63,7 +65,7 @@ let collectPerformanceMetrics = async (): result<performanceMetrics, string> => 
       })()
     `
 
-    let (result, error) = await DevToolsAPI.eval(script)
+    let (result, error) = await DevToolsAPI.evaluateCode(script)
 
     switch error {
     | Some(_) => Error("Failed to collect performance metrics")

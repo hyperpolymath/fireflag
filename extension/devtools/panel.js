@@ -125,7 +125,7 @@ async function collectMetrics() {
       })()
     `;
 
-    const [result, error] = await browser.devtools.inspectedWindow.eval(code);
+    const [result, error] = await browser.devtools.inspectedWindow["eval"](code);
 
     if (error) {
       throw new Error(error.value || 'Evaluation failed');
@@ -231,7 +231,7 @@ async function inspectFlag(key) {
     })()
   `;
 
-  const [result] = await browser.devtools.inspectedWindow.eval(code);
+  const [result] = await browser.devtools.inspectedWindow["eval"](code);
   logToConsole(`Inspected flag: ${escapeHtml(key)} on ${result.url}`, 'info');
 }
 

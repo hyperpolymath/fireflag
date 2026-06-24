@@ -1,5 +1,5 @@
 <!--
-SPDX-License-Identifier: MPL-2.0
+SPDX-License-Identifier: CC-BY-SA-4.0
 Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 -->
 # FireFlag v0.1.0 - Automated Test Report
@@ -164,7 +164,7 @@ All 14 warnings are **acceptable and non-blocking**:
 ### Code Quality Checks ✅
 
 **SPDX Headers:**
-- ✅ All source files have `SPDX-License-Identifier: MPL-2.0`
+- ✅ All source files have `SPDX-License-Identifier: CC-BY-SA-4.0`
 - ✅ Copyright attribution correct: Jonathan D.A. Jewell
 
 **Network Requests:**

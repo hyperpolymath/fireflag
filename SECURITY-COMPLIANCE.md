@@ -50,7 +50,7 @@ sha256sum extension/web-ext-artifacts/fireflag-0.1.0.xpi > SHA256SUMS
 
 **Implementation:**
 ```javascript
-// extension/lib/rescript/DatabaseUpdater.res
+// extension/lib/affinescript/DatabaseUpdater.res
 fetch("https://api.github.com/...")
 ```
 

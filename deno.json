@@ -3,7 +3,7 @@
     "std/": "https://deno.land/std@0.220.0/",
     "std/assert": "https://deno.land/std@0.220.0/assert/mod.ts",
     "std/testing/": "https://deno.land/std@0.220.0/testing/",
-    "@rescript/runtime/": "https://esm.sh/@rescript/runtime@12.1.0/"
+    "@affinescript/runtime/": "https://esm.sh/@affinescript/runtime@12.1.0/"
   },
   "tasks": {
     "test": "deno test --allow-read --no-check 'tests/**/*Test.res.js'",

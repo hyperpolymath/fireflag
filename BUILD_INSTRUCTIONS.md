@@ -9,7 +9,7 @@ This document explains how to build FireFlag from source code.
 ## Prerequisites
 
 - **Deno** 2.1.4 or later (JavaScript/TypeScript runtime)
-- **ReScript** compiler (for .res → .js compilation)
+- **AffineScript** compiler (for .res → .js compilation)
 - **Idris2** 0.7.0 or later (optional - for rebuilding formally verified libraries)
 
 ## Quick Build (Reviewers)
@@ -33,7 +33,7 @@ ls -lh ../fireflag-0.1.0.zip
 
 ## Full Build from Source (Optional)
 
-If you want to rebuild the ReScript files:
+If you want to rebuild the AffineScript files:
 
 ### 1. Install Dependencies
 
@@ -41,18 +41,18 @@ If you want to rebuild the ReScript files:
 # Install Deno (if not already installed)
 curl -fsSL https://deno.land/install.sh | sh
 
-# Install ReScript globally
-deno install -g @rescript/core
+# Install AffineScript globally
+deno install -g @affinescript/core
 ```
 
-### 2. Rebuild ReScript Files
+### 2. Rebuild AffineScript Files
 
 ```bash
-# Navigate to lib/rescript directory
-cd extension/lib/rescript/
+# Navigate to lib/affinescript directory
+cd extension/lib/affinescript/
 
 # Compile .res files to .res.js
-rescript build
+affinescript build
 
 # OR use Deno to compile
 deno task build
@@ -68,7 +68,7 @@ deno task build
 
 ```bash
 # Check that .res.js files exist
-ls -l extension/lib/rescript/*.res.js
+ls -l extension/lib/affinescript/*.res.js
 
 # Should show: Types.res.js
 ```
@@ -113,7 +113,7 @@ fireflag/
 │   ├── options/                 # Options page
 │   ├── devtools/                # DevTools panel
 │   ├── lib/                     # Libraries
-│   │   ├── rescript/            # ReScript source (.res)
+│   │   ├── affinescript/            # AffineScript source (.res)
 │   │   │   └── *.res.js         # Compiled JavaScript
 │   │   ├── idris/               # Idris2 proofs (.idr)
 │   │   └── dom-utils.js         # Safe DOM utilities
@@ -150,12 +150,12 @@ diff submitted.txt built.txt
 
 ## Code Generators Used
 
-1. **ReScript Compiler**
+1. **AffineScript Compiler**
    - Version: Latest stable
-   - Input: `.res` files (ReScript source)
+   - Input: `.res` files (AffineScript source)
    - Output: `.res.js` files (JavaScript)
    - Purpose: Type-safe JavaScript generation
-   - Repository: https://github.com/rescript-lang/rescript-compiler
+   - Repository: https://github.com/affinescript-lang/affinescript-compiler
 
 2. **Idris2** (Optional, for proofs only)
    - Version: 0.7.0+
@@ -178,9 +178,9 @@ diff submitted.txt built.txt
 
 ## Notes for Reviewers
 
-### Why ReScript?
+### Why AffineScript?
 
-ReScript provides:
+AffineScript provides:
 - **Type safety:** Compile-time guarantees against common JavaScript errors
 - **Memory safety:** No null/undefined errors at runtime
 - **Performance:** Generates optimized JavaScript
@@ -203,6 +203,6 @@ All source code is available at:
 
 ---
 
-**Build Time:** < 5 seconds (ReScript compilation only)
+**Build Time:** < 5 seconds (AffineScript compilation only)
 **Build Reproducibility:** Deterministic (same source → same output)
-**Build Dependencies:** Deno + ReScript (optional: Idris2 for proofs)
+**Build Dependencies:** Deno + AffineScript (optional: Idris2 for proofs)

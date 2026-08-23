@@ -11,7 +11,7 @@ Jonathan D.A. Jewell
 *Addendum 2026-04-18 (post-audit, same day):* the banned-language
 finding in §3.2 ("Banned-language violation (CRITICAL)") has been
 *resolved*.  All six TypeScript test files (3 028 LOC) were transpiled
-to ReScript, replaced with:
+to AffineScript, replaced with:
 
 * `tests/unit/TypesTest.res` (23 tests)
 * `tests/unit/FlagEvaluationTest.res` (19 tests)
@@ -87,7 +87,7 @@ Publication requires B+. Long alpha is discipline, not shame.
 | RSR mandatory workflows (17+)
 | PRESENT (24 YAML files)
 | `.github/workflows/` — includes codeql, scorecard, quality, mirror,
-  instant-sync, guix-nix-policy, rsr-antipattern, security-policy,
+  instant-sync, guix-guix-policy, rsr-antipattern, security-policy,
   wellknown-enforcement, workflow-linter, npm-bun-blocker, ts-blocker,
   secret-scanner, scorecard-enforcer, hypatia-scan, svalin-scan,
   vordr-verify, selur-secrets, boj-build, container-build,
@@ -126,9 +126,9 @@ Publication requires B+. Long alpha is discipline, not shame.
   extension store per Rule 2 fallback). MPL-2.0 preferred per
   STATE `[metadata] license` and META.a2ml.
 
-| `guix.scm` + `flake.nix`
+| `guix.scm` + `flake.guix`
 | PRESENT (both)
-| Root — guix.scm 3365 bytes, flake.nix 3540 bytes
+| Root — guix.scm 3365 bytes, flake.guix 3540 bytes
 
 | `.well-known/` (security.txt, ai.txt, humans.txt, groove/)
 | PRESENT (all three + groove/ subdir)
@@ -137,7 +137,7 @@ Publication requires B+. Long alpha is discipline, not shame.
 | SPDX headers on source
 | PRESENT on all sampled source — all `.js`, `.res`, `.idr`, `.ts`
   test files carry headers
-| Extension JS + ReScript + Idris2 carry
+| Extension JS + AffineScript + Idris2 carry
   `MPL-2.0 (MPL-2.0 preferred; MPL-2.0 required for Firefox
   extension store)` — legitimate platform-required form per Rule 2.
   Test `.ts` files carry `MPL-2.0` directly.
@@ -201,7 +201,7 @@ Verified TypeScript (not just `.ts` extension) by inspecting
 Per the repo-local `.claude/CLAUDE.md` (system reminder surfaced this
 audit) and estate CLAUDE.md:
 
-- BANNED: TypeScript → replacement: ReScript.
+- BANNED: TypeScript → replacement: AffineScript.
 - `deno.json` runs all tests via `deno test tests/`, so they execute as
   TypeScript despite the policy.
 
@@ -240,11 +240,11 @@ code coexists with it in the same tree.
 | 1 387 LOC across 7 files
 | `background.js` (193), `popup.js` (264), `sidebar.js` (378),
   `options.js` (143), `devtools.js` (19), `panel.js` (323),
-  `dom-utils.js` (67). Policy *permits* JS "only where ReScript
+  `dom-utils.js` (67). Policy *permits* JS "only where AffineScript
   cannot" — these are mostly UI glue, but substantial sections could
-  be ReScript-authored.
+  be AffineScript-authored.
 
-| ReScript source (allowed by policy)
+| AffineScript source (allowed by policy)
 | 4 files, 830 LOC
 | `BrowserAPI.res` (178), `DatabaseUpdater.res` (335),
   `DevTools.res` (171), `Types.res` (146). `.res.js` build artefacts
@@ -261,7 +261,7 @@ code coexists with it in the same tree.
 
 | OCaml build artefacts (`lib/ocaml/*.res` + `.cmj`)
 | 4 `.res` files (826 LOC) + 4 `.cmj` (0 bytes)
-| Look like copies of `extension/lib/rescript/*.res` with zero-byte
+| Look like copies of `extension/lib/affinescript/*.res` with zero-byte
   `.cmj` compile outputs. Possibly build cache drift.
 
 | Test LOC (TypeScript — banned language)
@@ -339,7 +339,7 @@ v2.0 C requires **per-file and per-directory orientation**.
 *What is missing (bad):*
 
 - *No `extension/README.adoc`* — the actual extension code (3 455 LOC
-  of JS + ReScript + Idris2) is not oriented at the directory level.
+  of JS + AffineScript + Idris2) is not oriented at the directory level.
 - *No per-subtree READMEs* under `extension/` — `background/`,
   `popup/`, `sidebar/`, `options/`, `devtools/`, `lib/`, `data/`,
   `icons/` all lack orientation. The sidebar's 378-LOC `sidebar.js`
@@ -437,7 +437,7 @@ using the software with feedback fed back. FireFlag is at *0*.
 | ✓ (with reservations)
 | All structural RSR requirements met (24 workflows, 6a2 layout,
   contractile trident, Justfile, `.well-known/`, LICENSES, SPDX
-  headers on all source, guix+nix, Containerfile). Scope documented
+  headers on all source, guix+guix, Containerfile). Scope documented
   in STATE.a2ml, README.adoc, ROADMAP.adoc, EXPLAINME.adoc,
   SEMANTICS.adoc. Total test count (94) is filesystem-verifiable.
 | Multi-push-remote config violates
@@ -510,11 +510,11 @@ Positive signals that earn the D and keep it out of E:
    npm-bun-blocker, ts-blocker, hypatia-scan, svalin-scan,
    vordr-verify), all 6 `.machine_readable/6a2/*.a2ml` files present
    (even if 5 are stubs), contractile trident with runners, Justfile +
-   Mustfile, LICENSES/, guix.scm + flake.nix, .well-known/.
+   Mustfile, LICENSES/, guix.scm + flake.guix, .well-known/.
 
 What blocks *immediate* promotion to C (do these first):
 
-. **Convert the test suite from TypeScript to ReScript.** 3 028 LOC,
+. **Convert the test suite from TypeScript to AffineScript.** 3 028 LOC,
   6 files, ~1-2 weeks of focused work. `.rs.js` compile artefacts
   already in use, so toolchain is ready.
   OR — if TypeScript in test fixtures is to be declared a permanent
@@ -616,7 +616,7 @@ e2e-tests = 14                   # part-of-94
 security-tests = 17              # part-of-94 (mapped to aspect/)
 benchmarks = 29                  # was 28 — verified on disk
 total-tests = 94                 # verified via `Deno.test(` grep
-test-language = "TypeScript (BANNED — convert to ReScript for grade C)"
+test-language = "TypeScript (BANNED — convert to AffineScript for grade C)"
 
 [crg-requirements]
 unit-tests = "DONE"
@@ -636,7 +636,7 @@ benchmarks = "DONE"
 
 [blockers]
 banned-test-language = "3 028 LOC of TypeScript in tests/ — convert
-                         to ReScript or document ADR exception."
+                         to AffineScript or document ADR exception."
 gamed-ts-blocker = "ts-blocker.yml only inspects HEAD~1 additions;
                     existing .ts code invisible. Fix or delete."
 completion-mismatch = "README says 99%, STATE says 75% — reconcile."

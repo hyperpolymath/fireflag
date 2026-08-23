@@ -71,7 +71,7 @@ Added three comprehensive documents:
 
 **High Findings:**
 - DOM manipulation in `dom-utils.js` → **Mitigated** (uses template elements)
-- Supply chain risk in `flake.nix` → **Documented** (development only)
+- Supply chain risk in `flake.guix` → **Documented** (development only)
 
 ---
 

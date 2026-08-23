@@ -45,12 +45,12 @@ this project aims to follow [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- refactor(tests): transpile TS test suite to ReScript
+- refactor(tests): transpile TS test suite to AffineScript
 - refactor: migrate 6SCM → 6A2 (.scm → .a2ml format)
 
 ### Documentation
 
-- docs(tests): sync STATE.a2ml + TEST-NEEDS + CRG audit to ReScript tests
+- docs(tests): sync STATE.a2ml + TEST-NEEDS + CRG audit to AffineScript tests
 - docs(governance): CRG v2.0 STRICT audit — C (declared) -> D (honest)
 - docs: add submission ready checklist
 - docs: add release notes for v0.1.0

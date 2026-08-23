@@ -212,7 +212,7 @@ Mozilla Public License 2.0 (MPL-2.0)
 
 **Package Size:** 119 KB
 
-**Languages:** JavaScript (UI), Idris2 (proofs), ReScript (types)
+**Languages:** JavaScript (UI), Idris2 (proofs), AffineScript (types)
 
 **Build System:** web-ext 9.2.0, containerized with Guix/Chainguard
 
@@ -398,7 +398,7 @@ extension/
 │   └── flags-schema.json             # JSON schema
 ├── lib/
 │   ├── idris/              # Safety proofs
-│   └── rescript/           # Type definitions
+│   └── affinescript/           # Type definitions
 └── icons/                  # Extension icons
 ```
 

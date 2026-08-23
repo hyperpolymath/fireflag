@@ -164,7 +164,7 @@ extension/
 ├── devtools/
 ├── lib/
 │   ├── dom-utils.js (enhanced)
-│   └── rescript/
+│   └── affinescript/
 └── web-ext-artifacts/
     └── fireflag-0.1.0.zip (package)
 ```

@@ -23,10 +23,10 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 - panic-attack scan: READY (use `just assail`)
 
 **Transpilation status (2026-04-18):** The entire TS test suite was
-transpiled to ReScript (per the hyperpolymath language policy's "no new
+transpiled to AffineScript (per the hyperpolymath language policy's "no new
 TypeScript files" rule).  Semantic parity was the acceptance criterion;
 all 94 tests pass under `deno task test`.  The counts above differ
-slightly from the original TS tallies because ReScript's variant
+slightly from the original TS tallies because AffineScript's variant
 exhaustiveness merged a couple of duplicate string-tag checks and the
 benchmark module shed two near-identical cases during conversion.
 
@@ -126,7 +126,7 @@ Results show:
 ### Remaining Work
 
 #### Build & Execution
-- [ ] ReScript build verification (use `just build`)
+- [ ] AffineScript build verification (use `just build`)
 - [ ] Extension loads in Firefox (manual test)
 - [ ] Extension loads in Chrome (manual test)
 - [ ] DevTools panel renders (manual test)
@@ -141,7 +141,7 @@ Results show:
 - [ ] panic-attack assail scan (use `just assail`)
 
 ## Priority
-- **HIGH** — Browser extension (12 ReScript + 16 JS + 9 Idris2 files) with ZERO tests. Feature flag systems need absolute correctness — a wrong flag evaluation can break production features for users. The codebase also has build artifacts mixed with source (lib/bs/, lib/ocaml/ appear to be ReScript build output), which needs cleanup.
+- **HIGH** — Browser extension (12 AffineScript + 16 JS + 9 Idris2 files) with ZERO tests. Feature flag systems need absolute correctness — a wrong flag evaluation can break production features for users. The codebase also has build artifacts mixed with source (lib/bs/, lib/ocaml/ appear to be AffineScript build output), which needs cleanup.
 
 ## Fuzz Testing Status
 

@@ -11,26 +11,26 @@ project := "fireflag"
 default:
     @just --list --unsorted
 
-# Build ReScript sources
+# Build AffineScript sources
 build:
-    deno run -A npm:rescript build
+    deno run -A npm:affinescript build
 
 # Build in watch mode
 watch:
-    deno run -A npm:rescript build -w
+    deno run -A npm:affinescript build -w
 
 # Clean build artifacts
 clean:
-    deno run -A npm:rescript clean
+    deno run -A npm:affinescript clean
     rm -rf src/**/*.res.js src/**/*.bs.js
 
-# Format ReScript code
+# Format AffineScript code
 fmt:
-    deno run -A npm:rescript format src/**/*.res
+    deno run -A npm:affinescript format src/**/*.res
 
 # Type check
 check:
-    deno run -A npm:rescript build
+    deno run -A npm:affinescript build
 
 # Run tests
 test:
@@ -40,10 +40,10 @@ test:
 example:
     deno run --allow-read src/example.js
 
-# Lint (placeholder for future rescript-eslint)
+# Lint (placeholder for future affinescript-eslint)
 lint:
-    @echo "Lint: Type checking via rescript build"
-    deno run -A npm:rescript build
+    @echo "Lint: Type checking via affinescript build"
+    deno run -A npm:affinescript build
 
 # Extension development tasks
 # --------------------------
@@ -77,7 +77,7 @@ sign-ext KEY SECRET:
 # Build in Guix environment (local)
 guix-build:
     guix shell -m .containerization/guix-manifest.scm -- \
-        bash -c "deno run -A npm:rescript build && cd extension && deno run -A npm:web-ext build"
+        bash -c "deno run -A npm:affinescript build && cd extension && deno run -A npm:web-ext build"
 
 # Build using Guix package definition
 guix-package:
@@ -190,7 +190,7 @@ doctor:
     }
     check "just"              just      "1.25" 
     check "git"               git       "2.40" 
-    check "ReScript (resc)"   rescript  "12.0" 
+    check "AffineScript (resc)"   affinescript  "12.0" 
 # Optional tools
 if command -v panic-attack >/dev/null 2>&1; then
     echo "  [OK]   panic-attack — available"

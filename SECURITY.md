@@ -32,7 +32,7 @@ We respond within 48 hours.
 ### `eval()` Usage in DevTools
 
 FireFlag uses `browser.devtools.inspectedWindow.eval()` in:
-- `extension/lib/rescript/DevTools.res.js`
+- `extension/lib/affinescript/DevTools.res.js`
 - `extension/devtools/panel.js`
 
 **This is not a security vulnerability.** The `eval()` is called via the Firefox DevTools API, which:
@@ -64,9 +64,9 @@ This is a false positive from static analysis tools detecting variable names lik
 - No dynamic evaluation of untrusted data
 - Content Security Policy (CSP) restricts script sources
 
-### Supply Chain (Nix Flake)
+### Supply Chain (Guix Flake)
 
-`flake.nix` inputs are not pinned with `narHash` or `rev`. This is a low-risk issue because:
+`flake.guix` inputs are not pinned with `narHash` or `rev`. This is a low-risk issue because:
 - Flakes are only used for development/reproducible builds
 - Production builds use locked dependencies (`package-lock.json`, `Cargo.lock`)
 - The extension itself has no runtime dependencies

@@ -39,7 +39,7 @@ FireFlag is a developer tool for managing feature flags safely and efficiently. 
 
 **🛡️ Safety First**
 - Built with Idris2 formally verified components
-- ReScript type-safety
+- AffineScript type-safety
 - Validated against unsafe patterns
 - Comprehensive flag database
 
@@ -167,7 +167,7 @@ Features:
 Technical:
 - Manifest V3 compliant
 - Firefox 142+ (desktop and Android)
-- Built with ReScript and Idris2
+- Built with AffineScript and Idris2
 - All data stored locally
 - No external API calls
 - No tracking or analytics

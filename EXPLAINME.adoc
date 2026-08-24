@@ -10,13 +10,13 @@ The README makes claims. This file backs them up.
 
 **Claim 1: "Manage 105+ Firefox flags with built-in safety ratings"** (README, Overview section)
 
-FireFlag ships a comprehensive flag database covering all major Firefox configuration domains. The database lives in `extension/data/flags-database.json` with 105 flag definitions, each tagged with one of four safety levels: Safe, Moderate, Advanced, or Experimental. The schema in `extension/data/flags-schema.json` enforces consistent structure (flag name, category, safety level, documentation, default value). The parser in `extension/lib/rescript/BrowserAPI.res.js` loads this at startup and validates each flag against the category schema.
+FireFlag ships a comprehensive flag database covering all major Firefox configuration domains. The database lives in `extension/data/flags-database.json` with 105 flag definitions, each tagged with one of four safety levels: Safe, Moderate, Advanced, or Experimental. The schema in `extension/data/flags-schema.json` enforces consistent structure (flag name, category, safety level, documentation, default value). The parser in `extension/lib/affinescript/BrowserAPI.res.js` loads this at startup and validates each flag against the category schema.
 
 *How it works:* When users click the extension icon, `extension/popup/popup.js` queries the in-memory database, filters by category and safety level, and renders results. No network call required—all data is bundled. Caveat: The safety ratings are curated manually by the maintainer and reflect Firefox ESR stability at time of release; they may become outdated if you run a more recent Firefox version.
 
 **Claim 2: "Privacy-First - Zero data collection, all data stored locally"** (README, Privacy & Security section)
 
-All extension state is written to `browser.storage.local` via Firefox's WebExtensions API (used in `extension/lib/rescript/DatabaseUpdater.res.js` and the storage handlers in `extension/background/background.js`). Change history is persisted to local IndexedDB with before/after values and timestamps. The extension never makes outbound API calls except for optional weekly flag database updates, which hit a static release URL (GitHub raw content).
+All extension state is written to `browser.storage.local` via Firefox's WebExtensions API (used in `extension/lib/affinescript/DatabaseUpdater.res.js` and the storage handlers in `extension/background/background.js`). Change history is persisted to local IndexedDB with before/after values and timestamps. The extension never makes outbound API calls except for optional weekly flag database updates, which hit a static release URL (GitHub raw content).
 
 *How it works:* On first install, the extension creates a local storage key and initializes history. Every flag modification appends a timestamped record. The sidebar panel (`extension/sidebar/sidebar.js`) reads history from local storage and renders the change log. Users can export JSON/CSV via the sidebar without any external service. Caveat: If auto-update is enabled, a weekly HTTP request checks the GitHub releases API for a newer flag database; this request includes your Firefox version as a User-Agent header but no personally identifiable information.
 
@@ -34,7 +34,7 @@ FireFlag is primarily used by its maintainer during Firefox privacy audits and e
 |===
 | Technology | Learn More | Why
 
-| **ReScript** | https://rescript-lang.org | Type-safe JavaScript compilation for extension logic
+| **AffineScript** | https://affinescript-lang.org | Type-safe JavaScript compilation for extension logic
 | **Deno** | https://deno.land | Build system and web-ext wrapper
 | **Idris2** | https://www.idris-lang.org | Safety proofs for flag state machine (planned v0.2.0)
 | **WebExtensions API** | https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions | Firefox extension platform (Mozilla requirement)
@@ -48,7 +48,7 @@ FireFlag is primarily used by its maintainer during Firefox privacy audits and e
 
 | `extension/manifest.json` | Manifest V3 configuration | Declares popup, sidebar, devtools, options permissions (only storage + host)
 | `extension/data/flags-database.json` | 105-flag registry | Curated Firefox flags with safety levels, category, documentation
-| `extension/lib/rescript/` | ReScript-compiled modules | BrowserAPI (storage wrapper), DatabaseUpdater (weekly refresh), Types (AST)
+| `extension/lib/affinescript/` | AffineScript-compiled modules | BrowserAPI (storage wrapper), DatabaseUpdater (weekly refresh), Types (AST)
 | `extension/popup/popup.js` | Browser action UI | Flag search, category/safety filters, detail modal
 | `extension/sidebar/sidebar.js` | Sidebar panel | History tab (changelog), export tab (JSON/CSV download)
 | `extension/background/background.js` | Service worker | Storage listeners, update scheduler, permission checks

@@ -131,7 +131,7 @@ toc::[]
 * Desktop only (Firefox 112+)
 * No Android support yet
 * Manual screenshot capture required for production
-* ReScript compilation warnings (non-blocking)
+* AffineScript compilation warnings (non-blocking)
 
 == Version Roadmap
 
@@ -173,7 +173,7 @@ toc::[]
 
 **Technical Improvements:**
 
-* Fix ReScript compilation warnings
+* Fix AffineScript compilation warnings
 * Migrate innerHTML to textContent where possible
 * Add data_collection_permissions (Firefox 140+)
 * Improve error handling
@@ -237,8 +237,8 @@ toc::[]
 ** Reduce memory footprint
 ** Edge-ready architecture
 
-* 🎯 **ReScript Full Compilation**
-** Complete ReScript type safety
+* 🎯 **AffineScript Full Compilation**
+** Complete AffineScript type safety
 ** Compile all UI code
 ** Remove JavaScript fallbacks
 ** Type-safe API layer
@@ -305,7 +305,7 @@ toc::[]
 
 1. Android support
 2. Real screenshot capture
-3. Fix ReScript compilation warnings
+3. Fix AffineScript compilation warnings
 4. i18n framework
 5. Flag recommendations
 
@@ -320,7 +320,7 @@ toc::[]
 **Low Priority (v0.3.0 → v1.0.0):**
 
 1. WASM compilation
-2. Full ReScript migration
+2. Full AffineScript migration
 3. Advanced UI features
 4. Enterprise features
 5. Browser compatibility expansion
@@ -342,7 +342,7 @@ toc::[]
 |===
 |Skill |Contribution Opportunities
 
-|**JavaScript/ReScript**
+|**JavaScript/AffineScript**
 |UI components, flag evaluation logic, type definitions
 
 |**Idris2**

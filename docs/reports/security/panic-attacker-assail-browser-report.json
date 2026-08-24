@@ -5,10 +5,10 @@
   "weak_points": [
     {
       "category": "SupplyChain",
-      "location": "flake.nix",
-      "file": "flake.nix",
+      "location": "flake.guix",
+      "file": "flake.guix",
       "severity": "High",
-      "description": "flake.nix declares inputs without narHash, rev pinning, or sibling flake.lock — dependency revision is unpinned in flake.nix",
+      "description": "flake.guix declares inputs without narHash, rev pinning, or sibling flake.lock — dependency revision is unpinned in flake.guix",
       "recommended_attack": []
     },
     {
@@ -23,10 +23,10 @@
     },
     {
       "category": "DynamicCodeExecution",
-      "location": "extension/lib/rescript/DevTools.res.js",
-      "file": "extension/lib/rescript/DevTools.res.js",
+      "location": "extension/lib/affinescript/DevTools.res.js",
+      "file": "extension/lib/affinescript/DevTools.res.js",
       "severity": "Critical",
-      "description": "eval() usage in extension/lib/rescript/DevTools.res.js",
+      "description": "eval() usage in extension/lib/affinescript/DevTools.res.js",
       "recommended_attack": [
         "cpu",
         "memory"
@@ -106,7 +106,7 @@
   },
   "file_statistics": [
     {
-      "file_path": "flake.nix",
+      "file_path": "flake.guix",
       "lines": 116,
       "unsafe_blocks": 0,
       "panic_sites": 0,
@@ -136,7 +136,7 @@
       "threading_constructs": 0
     },
     {
-      "file_path": "extension/lib/rescript/DatabaseUpdater.res",
+      "file_path": "extension/lib/affinescript/DatabaseUpdater.res",
       "lines": 335,
       "unsafe_blocks": 3,
       "panic_sites": 0,
@@ -146,7 +146,7 @@
       "threading_constructs": 0
     },
     {
-      "file_path": "extension/lib/rescript/DatabaseUpdater.res.js",
+      "file_path": "extension/lib/affinescript/DatabaseUpdater.res.js",
       "lines": 355,
       "unsafe_blocks": 0,
       "panic_sites": 0,
@@ -215,9 +215,9 @@
   "dependency_graph": {
     "edges": [
       {
-        "from": "extension/lib/rescript/DatabaseUpdater.res",
-        "to": "extension/lib/rescript/DatabaseUpdater.res.js",
-        "relation": "shared_dir:extension/lib/rescript",
+        "from": "extension/lib/affinescript/DatabaseUpdater.res",
+        "to": "extension/lib/affinescript/DatabaseUpdater.res.js",
+        "relation": "shared_dir:extension/lib/affinescript",
         "weight": 1.0
       }
     ]
@@ -249,7 +249,7 @@
         "sink_axis": "cpu",
         "severity_value": 5.0,
         "files": [
-          "extension/lib/rescript/DevTools.res.js",
+          "extension/lib/affinescript/DevTools.res.js",
           "extension/devtools/panel.js"
         ],
         "frameworks": [],
@@ -291,7 +291,7 @@
         "sink_axis": "memory",
         "severity_value": 5.0,
         "files": [
-          "extension/lib/rescript/DevTools.res.js",
+          "extension/lib/affinescript/DevTools.res.js",
           "extension/lib/dom-utils.js",
           "extension/devtools/panel.js"
         ],

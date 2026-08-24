@@ -22,7 +22,7 @@ security-tests = 21
 benchmarks = 26
 total-tests = 94
 test-pass-rate = 100
-test-language = "rescript"
+test-language = "affinescript"
 
 [test-suites]
 types = "tests/unit/TypesTest.res"
@@ -45,12 +45,12 @@ aspect = "DONE"
 benchmarks = "DONE"
 
 [recent-changes]
-2026-04-18 = "Transpiled the full TS test suite to ReScript per hyperpolymath language policy. 94 tests still pass (42 unit + 18 property + 13 E2E + 21 security) across 26 benchmarks. Extension XPI unaffected (no TS ever shipped). Added @rescript/runtime esm.sh mapping to deno.json; tests/ registered as a dev source dir in rescript.json."
+2026-04-18 = "Transpiled the full TS test suite to AffineScript per hyperpolymath language policy. 94 tests still pass (42 unit + 18 property + 13 E2E + 21 security) across 26 benchmarks. Extension XPI unaffected (no TS ever shipped). Added @affinescript/runtime esm.sh mapping to deno.json; tests/ registered as a dev source dir in affinescript.json."
 2026-04-04 = "Added comprehensive Deno test suite: 94 tests (42 unit + 21 property + 14 E2E + 17 security), 28 benchmarks, 100% pass rate. Deleted tests/fuzz/placeholder.txt. Updated deno.json with test tasks."
 
 [next-actions]
 1 = "Run panic-attack assail scan"
-2 = "Verify ReScript build (`just build`)"
+2 = "Verify AffineScript build (`just build`)"
 3 = "Manual Firefox extension test"
 4 = "Manual Chrome extension test"
 5 = "Complete CRG B requirements (6 targets)"

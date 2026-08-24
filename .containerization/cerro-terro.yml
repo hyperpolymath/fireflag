@@ -52,8 +52,8 @@ stages:
           export PATH="${GUIX_PROFILE}/bin:$PATH"
           guix environment --pure fireflag
 
-      - name: Build ReScript
-        run: rescript build
+      - name: Build AffineScript
+        run: affinescript build
 
       - name: Verify Idris2 proofs
         run: |

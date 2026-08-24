@@ -169,7 +169,7 @@ All permissions are optional and requested only when needed:
    - **Resolution**: All content controlled by extension, no user input
 
 ### Low-Priority Improvements
-1. **Nix flake pinning**: `flake.nix` inputs not pinned
+1. **Guix flake pinning**: `flake.guix` inputs not pinned
    - **Impact**: Development only, not production
    - **Priority**: Low
 

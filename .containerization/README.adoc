@@ -53,8 +53,8 @@ Builds in local Guix environment (requires Guix installed).
 The `Containerfile` uses 4 stages:
 
 1. **guix-base**: Chainguard Wolfi + Guix installation
-2. **build-tools**: Install Deno, ReScript, Idris2, Zig via Guix
-3. **builder**: Compile extension (ReScript + Idris2 proofs)
+2. **build-tools**: Install Deno, AffineScript, Idris2, Zig via Guix
+3. **builder**: Compile extension (AffineScript + Idris2 proofs)
 4. **runtime**: Minimal image with just the built .xpi
 
 === Security Scanning Pipeline
@@ -67,7 +67,7 @@ The `build.sh` script orchestrates:
 
 2. **Build**:
    - Guix reproducible environment
-   - ReScript compilation
+   - AffineScript compilation
    - Idris2 proof checking
 
 3. **Post-build**:

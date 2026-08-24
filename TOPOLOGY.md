@@ -81,7 +81,7 @@ OVERALL:                            ██████████ 100%    v0.1.
 Idris2 Proofs ───► Background ──────► Browser Storage ───► Firefox Prefs
      │                 │                   │
      ▼                 ▼                   ▼
-ReScript Types ──► Extension UI ────► Flag Metadata
+AffineScript Types ──► Extension UI ────► Flag Metadata
 ```
 
 ## Update Protocol

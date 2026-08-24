@@ -28,7 +28,7 @@ Clients receive flag values without requiring persistent connections or complex 
 
 The simplest flag type. Returns `true` or `false`.
 
-[source,rescript]
+[source,affinescript]
 ----
 type booleanFlag = {
   key: string,
@@ -41,7 +41,7 @@ type booleanFlag = {
 
 Returns one of a predefined set of string values.
 
-[source,rescript]
+[source,affinescript]
 ----
 type variantFlag = {
   key: string,
@@ -55,7 +55,7 @@ type variantFlag = {
 
 Enables a feature for a percentage of users using consistent hashing.
 
-[source,rescript]
+[source,affinescript]
 ----
 type rolloutFlag = {
   key: string,
@@ -68,7 +68,7 @@ type rolloutFlag = {
 
 Targets specific user segments based on attributes.
 
-[source,rescript]
+[source,affinescript]
 ----
 type segmentFlag = {
   key: string,
@@ -104,7 +104,7 @@ Fire-and-forget flags use **eventual consistency** with the following guarantees
 
 Each flag maintains a version vector for conflict resolution:
 
-[source,rescript]
+[source,affinescript]
 ----
 type versionVector = {
   version: int,           // Monotonically increasing
@@ -123,7 +123,7 @@ When concurrent updates occur:
 3. **Node ID tiebreaker**: If timestamps equal, lexicographically larger `nodeId` wins
 4. **Checksum verification**: Ensures data integrity after resolution
 
-[source,rescript]
+[source,affinescript]
 ----
 let resolveConflict = (a: versionVector, b: versionVector): versionVector => {
   if a.version != b.version {
@@ -142,7 +142,7 @@ let resolveConflict = (a: versionVector, b: versionVector): versionVector => {
 
 Every flag value has an associated TTL controlling cache validity:
 
-[source,rescript]
+[source,affinescript]
 ----
 type ttlConfig = {
   defaultTtl: float,      // Default: 300000ms (5 minutes)
@@ -173,7 +173,7 @@ type ttlConfig = {
 
 === Expiry Policies
 
-[source,rescript]
+[source,affinescript]
 ----
 type expiryPolicy =
   | @as("absolute") Absolute     // Expires at fixed time
@@ -197,7 +197,7 @@ Flags that rarely change get longer TTLs; frequently changing flags get shorter 
 
 All flag operations produce immutable audit events:
 
-[source,rescript]
+[source,affinescript]
 ----
 type auditEventType =
   | @as("created") Created
@@ -211,7 +211,7 @@ type auditEventType =
 
 === Audit Record Structure
 
-[source,rescript]
+[source,affinescript]
 ----
 type auditRecord = {
   id: string,                    // UUID v7 (time-sortable)
@@ -263,7 +263,7 @@ type auditContext = {
 
 === Audit Query Interface
 
-[source,rescript]
+[source,affinescript]
 ----
 type auditQuery = {
   flagKey: option<string>,
@@ -291,7 +291,7 @@ Flag evaluation follows strict precedence:
 
 === Consistent Hashing for Rollouts
 
-[source,rescript]
+[source,affinescript]
 ----
 let evaluateRollout = (
   ~flagKey: string,
@@ -313,7 +313,7 @@ Properties:
 
 === Evaluation Context
 
-[source,rescript]
+[source,affinescript]
 ----
 type evaluationContext = {
   userId: option<string>,
@@ -348,7 +348,7 @@ Client                          Server
 
 === Sync Configuration
 
-[source,rescript]
+[source,affinescript]
 ----
 type syncConfig = {
   pollInterval: float,      // Default: 30000ms (30 seconds)
@@ -373,7 +373,7 @@ When the server is unreachable:
 
 === Flag Store Interface
 
-[source,rescript]
+[source,affinescript]
 ----
 module type FlagStore = {
   let get: string => Promise.t<option<flagWithMeta>>
@@ -402,7 +402,7 @@ module type FlagStore = {
 
 === Error Types
 
-[source,rescript]
+[source,affinescript]
 ----
 type flagError =
   | @as("not_found") NotFound
@@ -452,7 +452,7 @@ type flagError =
 
 === Access Control
 
-[source,rescript]
+[source,affinescript]
 ----
 type permission =
   | @as("read") Read           // Evaluate flags
@@ -477,7 +477,7 @@ type accessToken = {
 
 == Appendix: Configuration Reference
 
-[source,rescript]
+[source,affinescript]
 ----
 type fireflagConfig = {
   // Storage

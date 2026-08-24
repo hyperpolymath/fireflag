@@ -103,7 +103,7 @@ All 14 warnings are **acceptable and non-blocking**:
 - **Icons:** 6 files (5 PNG sizes + SVG source)
 - **Data:** 3 files (105-flag database, 8-flag original, schema)
 - **Idris2 Proofs:** 9 files (safety verification)
-- **ReScript Types:** 14 files (type definitions)
+- **AffineScript Types:** 14 files (type definitions)
 
 ### Required Components ✅
 
@@ -118,7 +118,7 @@ All 14 warnings are **acceptable and non-blocking**:
 | Icons | ✅ Present | icons/* (6 files, 53 KB) |
 | Flag database | ✅ Present | data/flags-database-expanded.json (81 KB) |
 | Safety proofs | ✅ Present | lib/idris/* (9 files, 55 KB) |
-| Type definitions | ✅ Present | lib/rescript/* (14 files) |
+| Type definitions | ✅ Present | lib/affinescript/* (14 files) |
 
 ### Package Size
 
@@ -347,9 +347,9 @@ All 14 warnings are **acceptable and non-blocking**:
 
 ### Non-Blocking Issues
 
-1. **ReScript Compilation Warnings**
-   - **Issue:** ReScript compiler shows deprecation warnings
-   - **Impact:** None (extension uses JavaScript UI, not compiled ReScript)
+1. **AffineScript Compilation Warnings**
+   - **Issue:** AffineScript compiler shows deprecation warnings
+   - **Impact:** None (extension uses JavaScript UI, not compiled AffineScript)
    - **Plan:** Fix in v0.2.0 when adding WASM optimizations
 
 2. **Node.js Version Warnings**
@@ -523,7 +523,7 @@ These require loading the extension in Firefox:
    - Fix innerHTML warnings (use textContent where possible)
    - Add Android support (API fallbacks)
    - Add data_collection_permissions (when Firefox 140 available)
-   - Compile ReScript for WASM optimizations
+   - Compile AffineScript for WASM optimizations
 
 ---
 

@@ -25,7 +25,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 - ✅ Icon set (5 sizes + SVG source)
 - ✅ Background service worker
 - ✅ Idris2 safety proof modules
-- ✅ ReScript type definitions
+- ✅ AffineScript type definitions
 
 ### Code Quality (100%)
 - ✅ SPDX headers on all files (MPL-2.0)

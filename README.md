@@ -220,7 +220,7 @@ See <a href="PRIVACY.md" class="md">PRIVACY</a> for full privacy policy.
 
 - **ImageMagick** (for screenshot generation)
 
-- **Guix** or **Nix** (optional, for containerized builds)
+- **Guix** or **Guix** (optional, for containerized builds)
 
 ## Quick Start
 
@@ -257,7 +257,7 @@ just test
     │   ├── icons/              # Extension icons
     │   └── lib/
     │       ├── idris/          # Safety proofs (Idris2)
-    │       └── rescript/       # Type definitions (ReScript)
+    │       └── affinescript/       # Type definitions (AffineScript)
     ├── .containerization/      # Docker + Guix builds
     ├── .screenshots/           # Screenshot generation
     ├── scripts/                # Build and signing scripts
@@ -278,7 +278,7 @@ just build-ext  # Uses web-ext
 ```bash
 just full-build
 # 1. Check Idris2 proofs
-# 2. Build ReScript (if applicable)
+# 2. Build AffineScript (if applicable)
 # 3. Generate icons
 # 4. Lint extension
 # 5. Run security scans
@@ -373,7 +373,7 @@ roadmap.
 
 - WASM optimizations for flag evaluation
 
-- ReScript compilation for type safety
+- AffineScript compilation for type safety
 
 - Advanced permission management
 
@@ -409,7 +409,7 @@ See [LICENSE](LICENSE) for full text.
 
 Built with:
 
-- **ReScript** - Type-safe JavaScript compilation
+- **AffineScript** - Type-safe JavaScript compilation
 
 - **Idris2** - Formal verification and safety proofs
 

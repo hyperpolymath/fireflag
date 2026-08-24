@@ -35,7 +35,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 ### Libraries
 - ✅ `lib/idris/` - Idris2 proof modules (FlagSafety, FlagTransaction, SafeUI)
-- ✅ `lib/rescript/` - ReScript type definitions
+- ✅ `lib/affinescript/` - AffineScript type definitions
 
 **Total Files:** 37 files
 **Total Size:** 119 KB (compressed)
@@ -78,7 +78,7 @@ fireflag-0.1.0.xpi
 │   └── flags-schema.json
 └── lib/
     ├── idris/ ✓
-    └── rescript/ ✓
+    └── affinescript/ ✓
 ```
 
 ## Build Notes
@@ -89,15 +89,15 @@ fireflag-0.1.0.xpi
 - Icon set (5 sizes + SVG source)
 - Background service worker
 - Idris2 safety proof modules
-- ReScript type definitions
+- AffineScript type definitions
 
 ### What Was NOT Built (Optional)
-- ReScript compilation (UI already in JavaScript)
+- AffineScript compilation (UI already in JavaScript)
 - WASM optimizations (not required for v1.0)
 - Idris2 compiled binaries (proof checking only)
 
 ### Build Method
-Used `web-ext build` to package extension without ReScript compilation.
+Used `web-ext build` to package extension without AffineScript compilation.
 JavaScript UI files are complete and functional.
 
 ## Testing Recommendations
@@ -128,7 +128,7 @@ sha256sum -c extension/web-ext-artifacts/SHA256SUMS
 ### Build Warnings (Non-Critical)
 - npm engine warnings for Node 20.11 vs 20.18 (can be ignored)
 - Deprecated packages (cheerio, whatwg-encoding) - from web-ext dependencies
-- ReScript code has deprecation warnings (not compiled in this build)
+- AffineScript code has deprecation warnings (not compiled in this build)
 
 ### Not Blocking Release
 These warnings are from development dependencies and don't affect the extension functionality.
@@ -145,7 +145,7 @@ These warnings are from development dependencies and don't affect the extension 
 7. ⏳ Submit to Mozilla Add-ons
 
 ### Optional Improvements
-- Compile ReScript code for type safety
+- Compile AffineScript code for type safety
 - Add WASM optimizations
 - Run containerized build for reproducibility
 - Generate SLSA provenance

@@ -81,7 +81,7 @@ guix-build:
 
 # Build using Guix package definition
 guix-package:
-    guix build -f guix.scm
+    guix build -f build/guix.scm
 
 # Build with Docker/Podman (simple)
 container-build:

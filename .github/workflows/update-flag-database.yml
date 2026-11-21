@@ -19,9 +19,9 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+        uses: actions/checkout@v6.0.2
       - name: Setup Deno
-        uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2
+        uses: denoland/setup-deno@v2.0.3
         with:
           deno-version: v2.x
       - name: Fetch Firefox source preferences
@@ -61,7 +61,7 @@ jobs:
           fi
       - name: Create issue for new flags
         if: steps.compare.outputs.changes_detected == 'true'
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v7
+        uses: actions/github-script@v8.0.0
         with:
           script: |
             const newFlags = ${{ steps.compare.outputs.new_flags }};
@@ -132,7 +132,7 @@ jobs:
         firefox-version: ['109', '115', '120', '125', 'nightly']
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+        uses: actions/checkout@v6.0.2
       - name: Test Firefox ${{ matrix.firefox-version }}
         run: |
           # Check which flags are valid for this Firefox version
@@ -148,7 +148,7 @@ jobs:
           COUNT=$(wc -l < flags-for-${{ matrix.firefox-version }}.txt)
           echo "Firefox ${{ matrix.firefox-version }}: $COUNT compatible flags"
       - name: Upload compatibility report
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
+        uses: actions/upload-artifact@v7.0.0
         with:
           name: compatibility-firefox-${{ matrix.firefox-version }}
           path: flags-for-${{ matrix.firefox-version }}.txt

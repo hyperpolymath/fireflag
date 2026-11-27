@@ -5,13 +5,12 @@
 # Stage 1: Base build environment with Guix
 FROM cgr.dev/chainguard/wolfi-base:latest AS guix-base
 
-# Install Guix for reproducible builds
+# Install Guix for reproducible builds (tar is provided by busybox in wolfi-base)
 RUN apk add --no-cache \
     bash \
     wget \
     xz \
     gpg \
-    tar \
     ca-certificates
 
 # Download and verify Guix (using latest stable)
